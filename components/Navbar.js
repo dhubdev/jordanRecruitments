@@ -184,21 +184,17 @@ const Navbar = () => {
 
         <Ul>
           <NewLink href="#about">
-            <Li>About</Li>
+            <Li>Find job</Li>
           </NewLink>
           <NewLink href="#clients">
-            <Li>Find a job</Li>
+            <Li>Post job</Li>
           </NewLink>
           <NewLink href="#offer">
-            <Li>List a job</Li>
-          </NewLink>
-
-          <NewLink href="#offer">
-            <Li>Pricing</Li>
+            <Li>About us</Li>
           </NewLink>
 
           <NewLink href="#offer">
-            <Li>Contact</Li>
+            <Li>Contact us</Li>
           </NewLink>
 
           <BtnDiv>
@@ -229,21 +225,17 @@ const Navbar = () => {
         {click && (
           <Ul2>
             <NewLink href="#about">
-              <Li>About</Li>
+              <Li>Find job</Li>
             </NewLink>
             <NewLink href="#clients">
-              <Li>Find a job</Li>
+              <Li>Post job</Li>
             </NewLink>
             <NewLink href="#offer">
-              <Li>List jobs</Li>
-            </NewLink>
-
-            <NewLink href="#offer">
-              <Li>Pricing</Li>
+              <Li>About us</Li>
             </NewLink>
 
             <NewLink href="#offer">
-              <Li>Contact</Li>
+              <Li>Contact us</Li>
             </NewLink>
 
             <BtnDiv>
