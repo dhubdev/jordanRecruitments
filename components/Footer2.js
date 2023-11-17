@@ -126,6 +126,7 @@ const LinkHead = styled.h3`
 
   @media screen and (max-width: 600px) {
     margin-left: 0;
+    font-size: 1.3rem;
   }
 `;
 const Ul = styled.ul`

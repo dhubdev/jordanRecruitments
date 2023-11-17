@@ -52,7 +52,7 @@ const Right = styled.div`
 const H2 = styled.h2`
   font-size: 2rem;
   @media screen and (max-width: 600px) {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
 `;
 const P = styled.p``;

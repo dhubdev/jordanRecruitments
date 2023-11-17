@@ -55,7 +55,7 @@ const H1 = styled.h1`
   }
 
   @media screen and (max-width: 600px) {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 `;
 const P = styled.p`
@@ -68,6 +68,7 @@ const P = styled.p`
 
   @media screen and (max-width: 600px) {
     width: 100%;
+    font-size: 1rem;
   }
 `;
 const Btn = styled.button`
