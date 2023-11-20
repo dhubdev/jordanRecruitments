@@ -32,6 +32,9 @@ const LogoDiv = styled.div`
   align-items: center;
   font-size: 1.7rem;
   font-weight: 700;
+  @media screen and (max-width: 600px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const Logo = styled(Image)`
