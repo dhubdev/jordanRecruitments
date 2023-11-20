@@ -145,7 +145,11 @@ const Navbar = () => {
 
   const router = useRouter();
   const handleclick = () => {
-    router.push("/contact");
+    router.push("/register");
+  };
+
+  const handleclick2 = () => {
+    router.push("/login");
   };
 
   const controlNavbar = () => {
@@ -207,7 +211,7 @@ const Navbar = () => {
             <Btn onClick={handleclick} background="#5BA4FC" color="#fff">
               Register
             </Btn>
-            <Btn onClick={handleclick} background="transparent" color="#000">
+            <Btn onClick={handleclick2} background="transparent" color="#000">
               Login
             </Btn>
           </BtnDiv>
