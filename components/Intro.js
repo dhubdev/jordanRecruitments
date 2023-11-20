@@ -3,23 +3,31 @@ import styled from "styled-components";
 
 const Div = styled.div`
   position: relative;
+  color: #fff;
+`;
+const Layer = styled.div`
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: #000;
+  opacity: 0.3;
 `;
 const Img = styled(Image)`
   position: absolute;
-  top: 6rem;
+  top: 0;
 
   width: 100%;
-  height: 80%;
-  object-fit: contain;
-  z-index: -1;
+  height: 100%;
+  object-fit: cover;
+  z-index: -10;
 
   @media screen and (max-width: 1024px) {
-    top: 3rem;
   }
 
   @media screen and (max-width: 600px) {
     object-fit: cover;
-    top: 5rem;
   }
 `;
 const Wrapper = styled.div`
@@ -76,9 +84,9 @@ const Btn = styled.button`
   height: 4rem;
   font-family: inherit;
   border: none;
-  background-color: #da2c85;
+  background-color: #5ba4fc;
   color: #fff;
-  border: 1px solid #da2c85;
+  border: 1px solid #5ba4fc;
   font-weight: 500;
   font-size: 1rem;
 
@@ -90,7 +98,8 @@ const Btn = styled.button`
 const Intro = () => {
   return (
     <Div>
-      <Img src="/drop4.svg" width={2000} height={2000} alt="image" />
+      <Layer />
+      <Img src="/intro2.jpg" width={2000} height={2000} alt="image" />
       <Wrapper>
         <H1>
           Welcome to Jordan Recruitments - Your Gateway to Exciting

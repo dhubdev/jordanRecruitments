@@ -10,7 +10,7 @@ import Image from "next/image";
 
 const FooterCon = styled.div`
   margin-top: 2rem;
-  background: #da2c85;
+  background: #5ba4fc;
   color: white;
 `;
 const FooterInfoCon = styled.div`

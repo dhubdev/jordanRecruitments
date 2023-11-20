@@ -10,7 +10,7 @@ const NavContainer = styled.div`
   position: fixed;
   width: 100%;
   z-index: 100;
-  background-color: #eeebf4;
+  background-color: #cde4fe;
   position: fixed;
   height: 5.2rem;
   @media screen and (max-width: 1024px) {
@@ -30,6 +30,8 @@ const LogoDiv = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
+  font-size: 1.7rem;
+  font-weight: 700;
 `;
 
 const Logo = styled(Image)`
@@ -75,7 +77,7 @@ const Ul2 = styled.ul`
     right: 0;
     width: 18rem;
     height: 40rem;
-    background: #eeebf4;
+    background: #cde4fe;
     padding: 2.5rem 1.5rem;
   }
 
@@ -115,7 +117,7 @@ const Btn = styled.button`
   border: none;
   background-color: ${(props) => props.background};
   color: ${(props) => props.color};
-  border: 1px solid #da2c85;
+  border: 1px solid #5ba4fc;
 
   border-radius: 10px;
   box-shadow: 3px 3px 15px 0 rgba(0, 0, 0, 0.2);
@@ -173,13 +175,14 @@ const Navbar = () => {
     <NavContainer className={show ? "active" : "hidden"}>
       <NavWrapper>
         <LogoDiv>
-          <Logo
+          {/* <Logo
             src="/dhublogo.svg"
             width={4000}
             height={4000}
             loading="lazy"
             alt="logo"
-          />
+          /> */}
+          JORDAN
         </LogoDiv>
 
         <Ul>
@@ -198,7 +201,7 @@ const Navbar = () => {
           </NewLink>
 
           <BtnDiv>
-            <Btn onClick={handleclick} background="#DA2C85" color="#fff">
+            <Btn onClick={handleclick} background="#5BA4FC" color="#fff">
               Register
             </Btn>
             <Btn onClick={handleclick} background="transparent" color="#000">
@@ -239,7 +242,7 @@ const Navbar = () => {
             </NewLink>
 
             <BtnDiv>
-              <Btn onClick={handleclick} background="#DA2C85" color="#fff">
+              <Btn onClick={handleclick} background="#5BA4FC" color="#fff">
                 Register
               </Btn>
               <Btn onClick={handleclick} background="transparent" color="#000">

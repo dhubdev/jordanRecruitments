@@ -27,7 +27,7 @@ const Img = styled(Image)`
   bottom: 0;
   margin: 0 auto;
   z-index: -1;
-  opacity: 0.6;
+  opacity: 0.3;
   width: 15rem;
   height: 15rem;
 `;
@@ -55,9 +55,9 @@ const Btn = styled.button`
   height: 3rem;
   font-family: inherit;
   border: none;
-  background-color: #da2c85;
+  background-color: #5ba4fc;
   color: #fff;
-  border: 1px solid #da2c85;
+  border: 1px solid #5ba4fc;
 
   border-radius: 5px;
   box-shadow: 3px 3px 15px 0 rgba(0, 0, 0, 0.2);
@@ -67,8 +67,8 @@ const Join = () => {
   return (
     <Div>
       <Wrapper>
-        <Img src="/icon.png" width={2000} height={2000} alt="image" />
-        <H2>Join Us Today!</H2>
+        <Img src="/JR.svg" width={2000} height={2000} alt="image" />
+        <H2>Sign Up Now!</H2>
         <P>
           Don't miss out on the opportunities that await you. Sign up now and
           embark on a journey to a brighter, more fulfilling career. Your dream

@@ -2,14 +2,14 @@ import Image from "next/image";
 import styled from "styled-components";
 
 const Div = styled.div`
-  background: #eeebf4;
+  background: #cde4fe;
   padding: 3rem 0;
 `;
 const Wrapper = styled.div`
   width: 80%;
   margin: 0 auto;
   display: flex;
-  flex-direction: column;
+
   align-items: center;
   @media screen and (max-width: 1024px) {
     width: 90%;
@@ -70,7 +70,7 @@ const Img = styled(Image)`
     object-fit: cover;
   }
 
-  @media screen and (max-width: 1024px) {
+  @media screen and (max-width: 600px) {
     width: 100%;
   }
 `;
@@ -79,9 +79,9 @@ const Btn = styled.button`
   height: 3rem;
   font-family: inherit;
   border: none;
-  background-color: #da2c85;
+  background-color: #5ba4fc;
   color: #fff;
-  border: 1px solid #da2c85;
+  border: 1px solid #5ba4fc;
 
   border-radius: 5px;
   box-shadow: 3px 3px 15px 0 rgba(0, 0, 0, 0.2);
