@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 
 const Div = styled.div`
@@ -89,6 +90,11 @@ const Btn = styled.button`
 `;
 
 const Explore = () => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push("/jobs");
+  };
   return (
     <Div>
       <Wrapper>
@@ -101,7 +107,7 @@ const Explore = () => {
               starting your career, our platform offers a diverse range of
               opportunities to match your skills and aspirations.
             </P>
-            <Btn>Explore Now</Btn>
+            <Btn onClick={handleClick}>Explore Now</Btn>
           </Left>
           <Right>
             <Img src="/expl.png" width={2000} height={2000} alt="image" />
