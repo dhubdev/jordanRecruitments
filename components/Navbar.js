@@ -86,6 +86,7 @@ const Ul2 = styled.ul`
 
   @media screen and (max-width: 600px) {
     width: 12rem;
+    gap: 2rem;
   }
 `;
 
@@ -97,6 +98,10 @@ const Li = styled.li`
   cursor: pointer;
   font-weight: 500;
   font-size: 1rem;
+
+  @media screen and (max-width: 1024px) {
+    font-weight: 400;
+  }
 `;
 
 const BtnDiv = styled.div`
@@ -193,7 +198,10 @@ const Navbar = () => {
         </LogoDiv>
 
         <Ul>
-          <NewLink href="#about">
+          <NewLink href="/">
+            <Li>Home</Li>
+          </NewLink>
+          <NewLink href="/jobs">
             <Li>Find job</Li>
           </NewLink>
           <NewLink href="#clients">
@@ -234,7 +242,10 @@ const Navbar = () => {
 
         {click && (
           <Ul2>
-            <NewLink href="#about">
+            <NewLink href="/">
+              <Li>Home</Li>
+            </NewLink>
+            <NewLink href="/jobs">
               <Li>Find job</Li>
             </NewLink>
             <NewLink href="#clients">
