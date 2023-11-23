@@ -42,3 +42,5 @@ export default class MyDocument extends Document {
     }
   }
 }
+
+//npx serve@latest out
