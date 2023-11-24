@@ -2,7 +2,11 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { data } from "./FilterData";
-import { MdOutlineSearch } from "react-icons/md";
+import {
+  MdArrowDropDown,
+  MdArrowDropUp,
+  MdOutlineSearch,
+} from "react-icons/md";
 
 const Div = styled.div``;
 const Wrapper = styled.div`
@@ -19,6 +23,10 @@ const Wrapper = styled.div`
 
   @media screen and (max-width: 1024px) {
     width: 90%;
+  }
+
+  @media screen and (max-width: 600px) {
+    width: 92%;
   }
 `;
 const TopCon = styled.div`
@@ -58,26 +66,37 @@ const RImg = styled(Image)`
 `;
 
 const LeftBanner = styled.div`
-  width: 96%;
-  background: #5ba4fc;
-  height: 10rem;
+  width: 100%;
+  position: relative;
+
+  height: 13rem;
   border-radius: 7px;
-  padding: 2rem 2%;
+
   display: flex;
   align-items: center;
   color: #fff;
   box-shadow: 3px 3px 15px 0 rgba(0, 0, 0, 0.2);
   @media screen and (max-width: 1024px) {
-    flex-direction: column-reverse;
-    height: unset;
-    gap: 1.3rem;
-    width: 94%;
-    padding: 2rem 3%;
+    height: 13rem;
+  }
+
+  @media screen and (max-width: 600px) {
+    height: 18rem;
   }
 `;
 
-const BinnerLeft = styled.div`
-  flex: 3;
+const Layer = styled.div`
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: #000;
+  opacity: 0.3;
+  border-radius: 7px;
+`;
+
+const Binner = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -85,38 +104,30 @@ const BinnerLeft = styled.div`
     flex: unset;
   }
 `;
-const BinnerRight = styled.div`
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  @media screen and (max-width: 1024px) {
-    flex: unset;
-  }
-`;
 
 const H3 = styled.h3`
   font-size: 1.6rem;
+  padding-left: 1rem;
   @media screen and (max-width: 600px) {
     font-size: 1.5rem;
   }
 `;
 const P = styled.p`
   font-size: 0.9rem;
+  padding: 0 1rem;
   @media screen and (max-width: 1024px) {
     flex: unset;
   }
 `;
 
 const Img = styled(Image)`
-  width: 12rem;
-  height: 12rem;
-  object-fit: contain;
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 7px;
   @media screen and (max-width: 1024px) {
-    flex-direction: column-reverse;
-    height: unset;
-    width: 20rem;
-    height: 12rem;
   }
 `;
 
@@ -191,12 +202,42 @@ const JobCon = styled.div`
     padding: 1.4rem 1rem;
   }
 `;
+
+const Head = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  @media screen and (max-width: 600px) {
+    gap: 1rem;
+    justify-content: unset;
+  }
+`;
 const Title = styled.h3`
   font-weight: 500;
   font-size: 1.2rem;
 
   @media screen and (max-width: 600px) {
     font-size: 1.2rem;
+
+    width: 20rem;
+  }
+`;
+
+const Btn2 = styled.button`
+  width: 8rem;
+  height: 3rem;
+  font-family: inherit;
+  border: none;
+  background-color: #5ba4fc;
+  color: #fff;
+  border: 1px solid #5ba4fc;
+
+  border-radius: 10px;
+  box-shadow: 3px 3px 15px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+
+  @media screen and (max-width: 1024px) {
+    width: 6rem;
   }
 `;
 const Desc = styled.p``;
@@ -206,6 +247,7 @@ const PJ = styled.p`
 
 const ListJobs = () => {
   const [search, setSearch] = useState("");
+  const [more, setMore] = useState(null);
 
   const [filtered, setFiltered] = useState([]);
 
@@ -224,13 +266,24 @@ const ListJobs = () => {
     });
     setFiltered(filteredData);
   };
+
+  const handleClick = (id) => {
+    console.log(id);
+    setMore(id);
+  };
+
+  const handleClick2 = (id) => {
+    setMore(null);
+  };
   return (
     <Div>
       <Wrapper>
         <TopCon>
           <Left>
             <LeftBanner>
-              <BinnerLeft>
+              <Img src="/jsup.jpeg" width={2000} height={2000} alt="image" />
+              <Layer />
+              <Binner>
                 <H3>Get more than a job</H3>
                 <P>
                   Rely on us to consistently represent you in the best possible
@@ -240,10 +293,7 @@ const ListJobs = () => {
                   candidates, offering continuous guidance and unlocking doors
                   to opportunities that can shape your career in the long run.
                 </P>
-              </BinnerLeft>
-              <BinnerRight>
-                <Img src="/aifile.svg" width={2000} height={2000} alt="image" />
-              </BinnerRight>
+              </Binner>
             </LeftBanner>
             <Form onSubmit={handelSubmit}>
               <Input
@@ -262,9 +312,46 @@ const ListJobs = () => {
                   filtered?.length !== 0 &&
                   filtered.map((item, i) => (
                     <JobCon key={i}>
-                      <Title>{item.title}</Title>
+                      <Head>
+                        <Title>{item.title}</Title>
+                        <Btn2>Apply</Btn2>
+                      </Head>
                       <PJ>Salary: {item.pay}</PJ>
-                      <Desc>{item.desc}</Desc>
+                      <PJ>Job type: {item.type}</PJ>
+                      <PJ>Location: {item.location}</PJ>
+                      <Desc>
+                        {more !== item._id
+                          ? item.desc.slice(0, 250) + "..."
+                          : item.desc}
+                      </Desc>
+                      {more === item._id ? (
+                        <PJ
+                          onClick={() => handleClick2(item._id)}
+                          style={{
+                            cursor: "pointer",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "0.3rem",
+                            color: "blue",
+                          }}
+                        >
+                          Show less <MdArrowDropUp />
+                        </PJ>
+                      ) : (
+                        <PJ
+                          onClick={() => handleClick(item._id)}
+                          style={{
+                            cursor: "pointer",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "0.3rem",
+                            color: "blue",
+                          }}
+                        >
+                          Show more <MdArrowDropDown />
+                        </PJ>
+                      )}
+                      <PJ>Duration: {item.duration}</PJ>
                       <PJ>Date posted: {item.datePosted}</PJ>
                     </JobCon>
                   ))}
