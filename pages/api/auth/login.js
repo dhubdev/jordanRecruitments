@@ -36,12 +36,6 @@ export default async (req, res) => {
         return res.status(422).json({ error: "Invalid username or password" });
         //return res.status(401).json({ error: "Invalid credentials" });
       }
-
-      res.status(201).json({
-        status: "Sign up successful!",
-        user: user,
-        result: { accessToken, refreshToken },
-      });
     }
   } catch (error) {
     console.log(error);
