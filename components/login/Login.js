@@ -17,6 +17,15 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media screen and (max-width: 1024px) {
+    height: 55rem;
+  }
+  @media screen and (max-width: 600px) {
+    width: 90%;
+    margin: 6rem auto 0;
+    height: unset;
+  }
 `;
 
 const Form = styled.form`
@@ -28,6 +37,10 @@ const Form = styled.form`
   border-radius: 5px;
   box-shadow: 3px 3px 15px 0 rgba(0, 0, 0, 0.2);
   padding: 1rem;
+
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
 `;
 const InputDiv = styled.div`
   display: flex;
