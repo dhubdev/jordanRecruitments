@@ -97,7 +97,7 @@ const NewLink = styled(Link)`
 const Li = styled.li`
   cursor: pointer;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 0.9rem;
 
   @media screen and (max-width: 1024px) {
     font-weight: 400;
@@ -150,7 +150,7 @@ const Navbar = () => {
 
   const router = useRouter();
   const handleclick = () => {
-    router.push("/register");
+    router.push("/signUp");
   };
 
   const handleclick2 = () => {
@@ -217,7 +217,7 @@ const Navbar = () => {
 
           <BtnDiv>
             <Btn onClick={handleclick} background="#5BA4FC" color="#fff">
-              Register
+              Sign up
             </Btn>
             <Btn onClick={handleclick2} background="transparent" color="#000">
               Login
@@ -261,7 +261,7 @@ const Navbar = () => {
 
             <BtnDiv>
               <Btn onClick={handleclick} background="#5BA4FC" color="#fff">
-                Register
+                Sign up
               </Btn>
               <Btn onClick={handleclick} background="transparent" color="#000">
                 Login

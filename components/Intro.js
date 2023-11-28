@@ -1,4 +1,7 @@
+import { UserContext } from "@/context/userContext";
 import Image from "next/image";
+import { parseCookies } from "nookies";
+import { useContext, useEffect } from "react";
 import styled from "styled-components";
 
 const Div = styled.div`
@@ -96,6 +99,19 @@ const Btn = styled.button`
 `;
 
 const Intro = () => {
+  const { user, setUser } = useContext(UserContext);
+
+  // const cookies = parseCookies();
+
+  // const userDetails = cookies?.userDetails
+  //   ? JSON.parse(cookies?.userDetails)
+  //   : "";
+
+  // useEffect(() => {
+  //   setUser(userDetails);
+  // }, []);
+
+  // console.log(user);
   return (
     <Div>
       <Layer />
