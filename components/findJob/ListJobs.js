@@ -319,7 +319,7 @@ const ListJobs = () => {
                 src="/jsup.jpeg"
                 width={2000}
                 height={2000}
-                loading="lazy"
+                priority={true}
                 alt="image"
               />
               <Layer />

@@ -119,7 +119,7 @@ const Intro = () => {
         src="/recruit2.jpg"
         width={2000}
         height={2000}
-        loading="lazy"
+        priority={true}
         alt="image"
       />
       <Wrapper>
