@@ -315,7 +315,13 @@ const ListJobs = () => {
         <TopCon>
           <Left>
             <LeftBanner>
-              <Img src="/jsup.jpeg" width={2000} height={2000} alt="image" />
+              <Img
+                src="/jsup.jpeg"
+                width={2000}
+                height={2000}
+                loading="lazy"
+                alt="image"
+              />
               <Layer />
               <Binner>
                 <H3>Get more than a job</H3>

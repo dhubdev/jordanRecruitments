@@ -115,7 +115,13 @@ const Intro = () => {
   return (
     <Div>
       <Layer />
-      <Img src="/recruit2.jpg" width={2000} height={2000} alt="image" />
+      <Img
+        src="/recruit2.jpg"
+        width={2000}
+        height={2000}
+        loading="lazy"
+        alt="image"
+      />
       <Wrapper>
         <H1>
           Welcome to Jordan Recruitments - Your Gateway to Exciting

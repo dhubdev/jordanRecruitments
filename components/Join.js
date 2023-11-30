@@ -67,7 +67,13 @@ const Join = () => {
   return (
     <Div>
       <Wrapper>
-        <Img src="/JR.svg" width={2000} height={2000} alt="image" />
+        <Img
+          src="/JR.svg"
+          width={2000}
+          height={2000}
+          loading="lazy"
+          alt="image"
+        />
         <H2>Sign Up Now!</H2>
         <P>
           Don't miss out on the opportunities that await you. Sign up now and

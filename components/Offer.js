@@ -80,7 +80,13 @@ const Offer = () => {
         <H2>What You Get</H2>
         <ConDiv>
           <Con>
-            <Img src="/josrch.png" width={2000} height={2000} alt="image" />
+            <Img
+              src="/josrch.png"
+              width={2000}
+              height={2000}
+              loading="lazy"
+              alt="image"
+            />
             <H3>Streamlined Job Search</H3>
             <P>
               Navigate effortlessly through our user-friendly interface to find
@@ -91,7 +97,13 @@ const Offer = () => {
           </Con>
 
           <Con>
-            <Img src="/apply.jpg" width={2000} height={2000} alt="image" />
+            <Img
+              src="/apply.jpg"
+              width={2000}
+              height={2000}
+              loading="lazy"
+              alt="image"
+            />
             <H3>Apply with Ease</H3>
             <P>
               Gone are the days of complex application processes. With Jordan
@@ -103,7 +115,13 @@ const Offer = () => {
           </Con>
 
           <Con>
-            <Img src="/profile.jpg" width={2000} height={2000} alt="image" />
+            <Img
+              src="/profile.jpg"
+              width={2000}
+              height={2000}
+              loading="lazy"
+              alt="image"
+            />
             <H3>Elevate Your Profile</H3>
             <P>
               Build a compelling professional profile that showcases your
@@ -114,7 +132,13 @@ const Offer = () => {
           </Con>
 
           <Con>
-            <Img src="/connect.png" width={2000} height={2000} alt="image" />
+            <Img
+              src="/connect.png"
+              width={2000}
+              height={2000}
+              loading="lazy"
+              alt="image"
+            />
             <H3>Connect with Leading Companies</H3>
             <P>
               Connect with top-notch employers actively seeking talented
@@ -125,7 +149,13 @@ const Offer = () => {
           </Con>
 
           <Con>
-            <Img src="/notify.png" width={2000} height={2000} alt="image" />
+            <Img
+              src="/notify.png"
+              width={2000}
+              height={2000}
+              loading="lazy"
+              alt="image"
+            />
             <H3>Get Notified About New Opportunities</H3>
             <P>
               Stay ahead of the curve by setting up personalized job alerts.
@@ -136,7 +166,13 @@ const Offer = () => {
           </Con>
 
           <Con>
-            <Img src="/empower.jpg" width={2000} height={2000} alt="image" />
+            <Img
+              src="/empower.jpg"
+              width={2000}
+              height={2000}
+              loading="lazy"
+              alt="image"
+            />
             <H3>Empowering Your Career Journey</H3>
             <P>
               At Jordan Recruitments, we believe in empowering individuals to

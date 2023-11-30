@@ -110,7 +110,13 @@ const Explore = () => {
             <Btn onClick={handleClick}>Explore Now</Btn>
           </Left>
           <Right>
-            <Img src="/expl.png" width={2000} height={2000} alt="image" />
+            <Img
+              src="/expl.png"
+              width={2000}
+              height={2000}
+              loading="lazy"
+              alt="image"
+            />
           </Right>
         </Con>
       </Wrapper>

@@ -91,7 +91,13 @@ const JoinTeam = () => {
       <Wrapper>
         <Con>
           <Left>
-            <Img src="/jointeam.jpg" width={2000} height={2000} alt="image" />
+            <Img
+              src="/jointeam.jpg"
+              width={2000}
+              height={2000}
+              loading="lazy"
+              alt="image"
+            />
           </Left>
           <Right>
             <H2>Join Our Team</H2>
