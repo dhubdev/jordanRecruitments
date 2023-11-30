@@ -264,9 +264,9 @@ const Navbar = () => {
             <NewLink href="/jobs">
               <Li>Find job</Li>
             </NewLink>
-            <NewLink href="#clients">
+            <div onClick={handleclick3}>
               <Li>Post job</Li>
-            </NewLink>
+            </div>
             <NewLink href="#offer">
               <Li>About us</Li>
             </NewLink>
