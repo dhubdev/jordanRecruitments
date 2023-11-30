@@ -124,6 +124,8 @@ const Mployee = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    let employeer = false;
+
     if (
       email.length === 0 ||
       fullname.length === 0 ||
@@ -144,14 +146,18 @@ const Mployee = () => {
 
       const { data } = await axios.post(
         `/api/auth/register`,
-        { email, fullname, phone, password, confirmPass },
+        { email, fullname, phone, password, confirmPass, employeer },
         config
       );
       toast.success(data?.status);
 
       cookie.set("userDetails", JSON.stringify(data));
 
-      router.push("/dashboard");
+      if (!data?.user?.employeer) {
+        router.push("/dashboard");
+      } else {
+        router.push("/employer/dashboard");
+      }
     } catch (error) {
       console.log(error.response);
       toast.error(error.response.data.error);

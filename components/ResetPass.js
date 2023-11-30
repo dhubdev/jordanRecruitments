@@ -104,12 +104,8 @@ const NewLink = styled(Link)`
 const P = styled.p`
   font-size: 0.9rem;
 `;
-const P2 = styled.p`
-  font-size: 1rem;
-  text-align: center;
-`;
 
-const Mployeer = () => {
+const ResetPass = () => {
   const [visible, setVisible] = useState(false);
   const [invisible, setInvisible] = useState(true);
   const [type, setType] = useState("password");
@@ -117,27 +113,16 @@ const Mployeer = () => {
   const [invisible2, setInvisible2] = useState(true);
   const [type2, setType2] = useState("password");
   const [err1, setErr1] = useState(false);
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [fullname, setFullname] = useState("");
-  const [address, setAddress] = useState("");
+
   const [password, setPassword] = useState("");
   const [confirmPass, SetConfirmPass] = useState("");
 
   const router = useRouter();
+  const { token } = router.query;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    let employeer = true;
-
-    if (
-      email.length === 0 ||
-      fullname.length === 0 ||
-      password.length === 0 ||
-      confirmPass.length === 0 ||
-      address.length === 0
-    ) {
+    if (password.length === 0 || confirmPass.length === 0) {
       setErr1(true);
     } else {
       setErr1(false);
@@ -150,23 +135,15 @@ const Mployeer = () => {
         },
       };
 
-      const { data } = await axios.post(
-        `/api/auth/register`,
-        { email, fullname, phone, password, confirmPass, employeer, address },
+      const { data } = await axios.put(
+        `/api/reset/${token}`,
+        { confirmPass, password },
         config
       );
-      toast.success(data?.status);
-
-      cookie.set("userDetails", JSON.stringify(data));
-
-      if (!data?.user?.employeer) {
-        router.push("/dashboard");
-      } else {
-        router.push("/employer/dashboard");
-      }
+      toast.success(data?.message);
+      router.push("/reset/success");
     } catch (error) {
-      console.log(error.response);
-      toast.error(error.response.data.error);
+      toast.error(error?.response?.data?.error);
     }
   };
 
@@ -175,53 +152,7 @@ const Mployeer = () => {
       <Wrapper>
         <Form onSubmit={handleSubmit}>
           <InputDiv>
-            <H3>Sign Up</H3>
-            <P2>Sign up as an employer to post jobs.</P2>
-          </InputDiv>
-          <InputDiv>
-            <Label>Company Name</Label>
-            <Input
-              value={fullname}
-              onChange={(e) => setFullname(e.target.value)}
-              placeholder="John Alfred"
-              style={{
-                borderColor: err1 && fullname.length <= 0 ? "red" : "#cde4fe",
-              }}
-            />
-          </InputDiv>
-          <InputDiv>
-            <Label>Company Email Address</Label>
-            <Input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="john@gmail.com"
-              style={{
-                borderColor: err1 && fullname.length <= 0 ? "red" : "#cde4fe",
-              }}
-            />
-          </InputDiv>
-          <InputDiv>
-            <Label>Company Phone Number</Label>
-            <Input
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              placeholder="+44 678 000 0000"
-              style={{
-                borderColor: err1 && fullname.length <= 0 ? "red" : "#cde4fe",
-              }}
-            />
-          </InputDiv>
-
-          <InputDiv>
-            <Label>Company Address</Label>
-            <Input
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              placeholder="+44 678 000 0000"
-              style={{
-                borderColor: err1 && address.length <= 0 ? "red" : "#cde4fe",
-              }}
-            />
+            <H3>Reset Password</H3>
           </InputDiv>
 
           <InputDiv>
@@ -294,9 +225,9 @@ const Mployeer = () => {
           </InputDiv>
 
           <InputDiv>
-            <Btn type="submit">Sign up</Btn>
+            <Btn type="submit">Reset</Btn>
             <NewLink href="/login">
-              <P>Have an account? Login</P>
+              <P>Here by mistake? Login</P>
             </NewLink>
           </InputDiv>
         </Form>
@@ -305,4 +236,4 @@ const Mployeer = () => {
   );
 };
 
-export default Mployeer;
+export default ResetPass;

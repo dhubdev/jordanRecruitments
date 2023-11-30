@@ -18,6 +18,16 @@ const userSchema = mongoose.Schema({
   phone: {
     type: String,
   },
+
+  address: {
+    type: String,
+  },
+
+  employeer: {
+    type: Boolean,
+  },
+
+  resetToken: { type: String },
 });
 
 export default mongoose.models.User || mongoose.model("User", userSchema);

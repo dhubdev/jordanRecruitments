@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { CgMenuLeft } from "react-icons/cg";
 import { CgClose } from "react-icons/cg";
 import { useRouter } from "next/router";
+import { parseCookies } from "nookies";
 
 const NavContainer = styled.div`
   position: fixed;
@@ -149,6 +150,13 @@ const Navbar = () => {
   const [click, setClick] = useState(false);
 
   const router = useRouter();
+
+  const cookies = parseCookies();
+
+  const userDetails = cookies?.userDetails
+    ? JSON.parse(cookies?.userDetails)
+    : "";
+
   const handleclick = () => {
     router.push("/signUp");
   };
@@ -183,6 +191,14 @@ const Navbar = () => {
     }
   }, [lastScrollY]);
 
+  const handleclick3 = () => {
+    if (!userDetails?.user?.employeer) {
+      router.push("/postJob/signUp");
+    } else {
+      router.push("/employer/dashboard");
+    }
+  };
+
   return (
     <NavContainer className={show ? "active" : "hidden"}>
       <NavWrapper>
@@ -204,9 +220,9 @@ const Navbar = () => {
           <NewLink href="/jobs">
             <Li>Find job</Li>
           </NewLink>
-          <NewLink href="#clients">
+          <div onClick={handleclick3}>
             <Li>Post job</Li>
-          </NewLink>
+          </div>
           <NewLink href="#offer">
             <Li>About us</Li>
           </NewLink>
@@ -263,7 +279,7 @@ const Navbar = () => {
               <Btn onClick={handleclick} background="#5BA4FC" color="#fff">
                 Sign up
               </Btn>
-              <Btn onClick={handleclick} background="transparent" color="#000">
+              <Btn onClick={handleclick2} background="transparent" color="#000">
                 Login
               </Btn>
             </BtnDiv>

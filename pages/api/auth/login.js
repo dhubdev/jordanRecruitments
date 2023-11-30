@@ -1,4 +1,3 @@
-import { accessTokenFunc, refreshTokenFunc } from "@/helpers/jwtHelper";
 import connectDB from "../../../lib/mongoose";
 import User from "../../../model/userModel";
 //import nodemailer from "nodemailer";
@@ -23,14 +22,10 @@ export default async (req, res) => {
       }
       const doMatch = await bcrypt.compare(password, user.password);
 
-      const accessToken = await accessTokenFunc(user._id.toString());
-      const refreshToken = await refreshTokenFunc(user._id.toString());
-
       if (doMatch) {
         res.status(200).json({
           status: "Login Successful!",
           user: user,
-          result: { accessToken, refreshToken },
         });
       } else {
         return res.status(422).json({ error: "Invalid username or password" });

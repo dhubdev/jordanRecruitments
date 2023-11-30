@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { data } from "./FilterData";
 import {
@@ -7,6 +7,9 @@ import {
   MdArrowDropUp,
   MdOutlineSearch,
 } from "react-icons/md";
+import { useRouter } from "next/router";
+import { parseCookies } from "nookies";
+import { UserContext } from "@/context/userContext";
 
 const Div = styled.div``;
 const Wrapper = styled.div`
@@ -48,14 +51,21 @@ const Right = styled.div`
   border: 1px solid #cde4fe;
   height: 16rem;
   border-radius: 7px;
+
+  @media screen and (max-width: 1024px) {
+    display: none;
+  }
+`;
+
+const Diiv = styled.div`
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 2rem;
-  @media screen and (max-width: 1024px) {
-    display: none;
-  }
+  cursor: pointer;
 `;
 
 const RImg = styled(Image)`
@@ -198,6 +208,12 @@ const JobCon = styled.div`
     transition: all ease 400ms;
   }
 
+  @media screen and (max-width: 1024px) {
+    &:hover {
+      background: unset;
+    }
+  }
+
   @media screen and (max-width: 600px) {
     padding: 1.4rem 1rem;
   }
@@ -248,11 +264,21 @@ const PJ = styled.p`
 const ListJobs = () => {
   const [search, setSearch] = useState("");
   const [more, setMore] = useState(null);
+  const { user, setUser } = useContext(UserContext);
 
   const [filtered, setFiltered] = useState([]);
 
+  const router = useRouter();
+
+  const cookies = parseCookies();
+
+  const userDetails = cookies?.userDetails
+    ? JSON.parse(cookies?.userDetails)
+    : "";
+
   useEffect(() => {
     setFiltered(data);
+    setUser(userDetails);
   }, []);
 
   const handelSubmit = (e) => {
@@ -274,6 +300,14 @@ const ListJobs = () => {
 
   const handleClick2 = (id) => {
     setMore(null);
+  };
+
+  const handleClick3 = () => {
+    if (!userDetails?.user?.employeer) {
+      router.push("/dashboard");
+    } else {
+      router.push("/employer/dashboard");
+    }
   };
   return (
     <Div>
@@ -359,8 +393,29 @@ const ListJobs = () => {
             </JobsCon>
           </Left>
           <Right>
-            <RImg src="/proficon.jpg" width={2000} height={2000} alt="image" />
-            <P>You are not logged in!</P>
+            {user?.length === 0 && (
+              <Diiv>
+                <RImg
+                  src="/proficon.jpg"
+                  width={2000}
+                  height={2000}
+                  alt="image"
+                />
+                <P>You are not logged in!</P>
+              </Diiv>
+            )}
+
+            {user?.length !== 0 && (
+              <Diiv onClick={handleClick3}>
+                <RImg
+                  src="/proficon.jpg"
+                  width={2000}
+                  height={2000}
+                  alt="image"
+                />
+                <P>Go to dashboard</P>
+              </Diiv>
+            )}
           </Right>
         </TopCon>
       </Wrapper>

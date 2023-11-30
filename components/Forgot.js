@@ -1,13 +1,12 @@
-import { UserContext } from "@/context/userContext";
 import axios from "axios";
-import Image from "next/image";
+
 import { useRouter } from "next/router";
-import { useContext, useState } from "react";
-import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md";
+import { useState } from "react";
+
 import { toast } from "react-toastify";
 import styled from "styled-components";
 import cookie from "js-cookie";
-import { parseCookies } from "nookies";
+
 import Link from "next/link";
 
 const Div = styled.div``;
@@ -84,14 +83,14 @@ const Btn = styled.button`
 const Visible = styled.div`
   position: absolute;
   right: 5%;
-  top: 40%;
+  top: 50%;
   font-size: 1.3rem;
   cursor: pointer;
 `;
 const Invisible = styled.div`
   position: absolute;
   right: 5%;
-  top: 40%;
+  top: 50%;
   font-size: 1.3rem;
   cursor: pointer;
 `;
@@ -105,22 +104,16 @@ const P = styled.p`
   font-size: 0.9rem;
 `;
 
-const Login = () => {
-  const [visible, setVisible] = useState(false);
-  const [invisible, setInvisible] = useState(true);
-  const [type, setType] = useState("password");
-
+const Forgot = () => {
   const [err1, setErr1] = useState(false);
   const [email, setEmail] = useState("");
-
-  const [password, setPassword] = useState("");
 
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (email.length === 0 || password.length === 0) {
+    if (email.length === 0) {
       setErr1(true);
     } else {
       setErr1(false);
@@ -133,20 +126,12 @@ const Login = () => {
         },
       };
 
-      const { data } = await axios.post(
-        `/api/auth/login`,
-        { email, password },
-        config
-      );
+      const { data } = await axios.post(`/api/reset/forget`, { email }, config);
       toast.success(data?.status);
 
-      cookie.set("userDetails", JSON.stringify(data));
+      cookie.set("email", email);
 
-      if (!data?.user?.employeer) {
-        router.push("/dashboard");
-      } else {
-        router.push("/employer/dashboard");
-      }
+      router.push("/reset/reset");
     } catch (error) {
       console.log(error.response);
       toast.error(error.response.data.error);
@@ -158,7 +143,7 @@ const Login = () => {
       <Wrapper>
         <Form onSubmit={handleSubmit}>
           <InputDiv>
-            <H3>Login</H3>
+            <H3>Reset password</H3>
           </InputDiv>
 
           <InputDiv>
@@ -174,47 +159,9 @@ const Login = () => {
           </InputDiv>
 
           <InputDiv>
-            <Label>Password</Label>
-            <Input
-              value={password}
-              type={type}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter password"
-              style={{
-                borderColor: err1 && fullname.length <= 0 ? "red" : "#cde4fe",
-              }}
-            />
-            <NewLink href="/reset/forgotPassword">
-              <P>Forgot password?</P>
-            </NewLink>
-
-            {invisible ? (
-              <Visible
-                onClick={() => {
-                  setVisible(true);
-                  setInvisible(false);
-                  setType("text");
-                }}
-              >
-                <MdOutlineVisibility />
-              </Visible>
-            ) : (
-              <Invisible
-                onClick={() => {
-                  setInvisible(true);
-                  setVisible(false);
-                  setType("password");
-                }}
-              >
-                <MdOutlineVisibilityOff />
-              </Invisible>
-            )}
-          </InputDiv>
-
-          <InputDiv>
-            <Btn type="submit">Login</Btn>
-            <NewLink href="/signUp">
-              <P>Don't have an account? Sign up</P>
+            <Btn type="submit">Send</Btn>
+            <NewLink href="/login">
+              <P>Here by mistake? Login</P>
             </NewLink>
           </InputDiv>
         </Form>
@@ -223,4 +170,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Forgot;

@@ -1,6 +1,7 @@
 import Footer2 from "@/components/Footer2";
 import Navbar from "@/components/Navbar";
-import Mployee from "@/components/signUp/Mployee";
+
+import Mployeer from "@/components/signUp/Mployeer";
 import { UserContext } from "@/context/userContext";
 
 import Head from "next/head";
@@ -20,24 +21,23 @@ export default function SignUp() {
 
   useEffect(() => {
     if (userDetails !== "") {
-      if (!userDetails?.user?.employeer) {
-        router.push("/dashboard");
-      } else {
+      if (userDetails?.user?.employeer) {
         router.push("/employer/dashboard");
       }
     }
   }, []);
+
   return (
     <>
       <Head>
-        <title>Jordan recruitments-Sign up</title>
-        <meta name="Jordan recruitments" content="sign up" />
+        <title>Jordan recruitments-Post jobs</title>
+        <meta name="Jordan recruitments" content="Post jobs" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/JR.svg" />
       </Head>
 
       <Navbar />
-      <Mployee />
+      <Mployeer />
       <Footer2 />
     </>
   );

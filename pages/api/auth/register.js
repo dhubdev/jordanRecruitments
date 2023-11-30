@@ -1,4 +1,3 @@
-import { accessTokenFunc, refreshTokenFunc } from "@/helpers/jwtHelper";
 import connectDB from "../../../lib/mongoose";
 import User from "../../../model/userModel";
 //import nodemailer from "nodemailer";
@@ -8,7 +7,15 @@ connectDB();
 export default async (req, res) => {
   try {
     if (req.method === "POST") {
-      const { email, fullname, password, phone, confirmPass } = req.body;
+      const {
+        email,
+        fullname,
+        password,
+        phone,
+        confirmPass,
+        employeer,
+        address,
+      } = req.body;
 
       //console.log(req.body);
 
@@ -38,6 +45,8 @@ export default async (req, res) => {
           password: HashedPassword,
           fullname: fullname,
           phone: phone,
+          employeer: employeer,
+          address: address,
         }).save();
 
         // const message = `<div style=' width:20rem; height: 15rem'>
@@ -89,13 +98,9 @@ export default async (req, res) => {
         //   });
         // });
 
-        const accessToken = await accessTokenFunc(newUser._id.toString());
-        const refreshToken = await refreshTokenFunc(newUser._id.toString());
-
         res.status(201).json({
           status: "Sign up successful!",
           user: newUser,
-          result: { accessToken, refreshToken },
         });
       }
     }
