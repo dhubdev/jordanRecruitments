@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import { data } from "./FilterData";
+//import { data } from "./FilterData";
+import axios from "axios";
 import {
   MdArrowDropDown,
   MdArrowDropUp,
@@ -267,6 +268,7 @@ const ListJobs = () => {
   const { user, setUser } = useContext(UserContext);
 
   const [filtered, setFiltered] = useState([]);
+  const [data, setData] = useState([]);
 
   const router = useRouter();
 
@@ -276,8 +278,25 @@ const ListJobs = () => {
     ? JSON.parse(cookies?.userDetails)
     : "";
 
+  const getPosts = async () => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      const { data } = await axios.get(`/api/jobs/getJobs`, {}, config);
+
+      setFiltered(data?.result);
+      setData(data?.result);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
   useEffect(() => {
-    setFiltered(data);
+    getPosts();
     setUser(userDetails);
   }, []);
 
@@ -350,7 +369,7 @@ const ListJobs = () => {
               <InnerCon>
                 {data?.length !== 0 &&
                   filtered?.length !== 0 &&
-                  filtered.map((item, i) => (
+                  filtered?.map((item, i) => (
                     <JobCon key={i}>
                       <Head>
                         <Title>{item.title}</Title>

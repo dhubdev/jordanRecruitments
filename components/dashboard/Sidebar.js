@@ -12,8 +12,9 @@ import { useRouter } from "next/router";
 
 const Div = styled.div`
   background: #cde4fe;
-  width: 20rem;
+  width: 17rem;
   height: 100vh;
+  position: fixed;
 `;
 const Wrapper = styled.div`
   width: 80%;
