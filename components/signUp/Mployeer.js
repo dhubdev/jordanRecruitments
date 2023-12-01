@@ -159,11 +159,7 @@ const Mployeer = () => {
 
       cookie.set("userDetails", JSON.stringify(data));
 
-      if (!data?.user?.employeer) {
-        router.push("/dashboard");
-      } else {
-        router.push("/employer/dashboard");
-      }
+      router.push("/employer/dashboard");
     } catch (error) {
       console.log(error.response);
       toast.error(error.response.data.error);
@@ -217,7 +213,7 @@ const Mployeer = () => {
             <Input
               value={address}
               onChange={(e) => setAddress(e.target.value)}
-              placeholder="+44 678 000 0000"
+              placeholder="Enter address"
               style={{
                 borderColor: err1 && address.length <= 0 ? "red" : "#cde4fe",
               }}

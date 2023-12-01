@@ -1,3 +1,4 @@
+import Sidebar from "@/components/dashboard/Sidebar";
 import { UserContext } from "@/context/userContext";
 import axios from "axios";
 import Head from "next/head";
@@ -5,9 +6,14 @@ import { useRouter } from "next/navigation";
 import { parseCookies } from "nookies";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import styled from "styled-components";
 
-const Dashboard = () => {
+const Div = styled.div``;
+const Wrapper = styled.div``;
+
+const Applications = () => {
   const { user, setUser } = useContext(UserContext);
+  const [opt, setOpt] = useState("");
 
   const router = useRouter();
 
@@ -23,6 +29,7 @@ const Dashboard = () => {
     }
 
     setUser(userDetails);
+    setOpt("/dashboard/applications");
   }, []);
 
   return (
@@ -35,13 +42,14 @@ const Dashboard = () => {
       </Head>
       <div>
         {user?.length !== 0 && (
-          <div>
-            <h1>Dashboard </h1>
-          </div>
+          <Div>
+            <Sidebar option={opt} />
+            <Wrapper></Wrapper>
+          </Div>
         )}
       </div>
     </>
   );
 };
 
-export default Dashboard;
+export default Applications;

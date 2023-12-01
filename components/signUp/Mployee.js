@@ -154,7 +154,7 @@ const Mployee = () => {
       cookie.set("userDetails", JSON.stringify(data));
 
       if (!data?.user?.employeer) {
-        router.push("/dashboard");
+        router.push("/dashboard/home");
       } else {
         router.push("/employer/dashboard");
       }

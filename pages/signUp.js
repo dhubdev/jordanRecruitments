@@ -21,7 +21,7 @@ export default function SignUp() {
   useEffect(() => {
     if (userDetails !== "") {
       if (!userDetails?.user?.employeer) {
-        router.push("/dashboard");
+        router.push("/dashboard/home");
       } else {
         router.push("/employer/dashboard");
       }
