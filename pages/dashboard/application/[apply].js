@@ -21,8 +21,7 @@ const Div = styled.div``;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+
   width: 70%;
   padding: 3rem 0;
   margin: 0 0 0 20rem;
@@ -504,6 +503,7 @@ const Apply = () => {
         {user?.length !== 0 && (
           <Div>
             <Sidebar option={opt} />
+
             <Wrapper>
               <JobCon>
                 <Hd>
