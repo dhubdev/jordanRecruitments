@@ -520,7 +520,7 @@ const Apply = () => {
 
               <Form onSubmit={handleSubmit}>
                 <InputDiv>
-                  <H3>Fill the form below to apply</H3>
+                  <H3>Fill the form below</H3>
                 </InputDiv>
                 <InputDiv>
                   <Label>Full Name</Label>
