@@ -60,5 +60,15 @@ body{
 
 }
 
+input[type="file"]{
+  display: none;
+}
 
+input[type="file2"]{
+  display: none;
+}
+
+input[type="file3"]{
+  display: none;
+}
 

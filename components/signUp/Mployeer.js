@@ -192,7 +192,7 @@ const Mployeer = () => {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="john@gmail.com"
               style={{
-                borderColor: err1 && fullname.length <= 0 ? "red" : "#cde4fe",
+                borderColor: err1 && email.length <= 0 ? "red" : "#cde4fe",
               }}
             />
           </InputDiv>
@@ -203,7 +203,7 @@ const Mployeer = () => {
               onChange={(e) => setPhone(e.target.value)}
               placeholder="+44 678 000 0000"
               style={{
-                borderColor: err1 && fullname.length <= 0 ? "red" : "#cde4fe",
+                borderColor: err1 && phone.length <= 0 ? "red" : "#cde4fe",
               }}
             />
           </InputDiv>
@@ -228,7 +228,7 @@ const Mployeer = () => {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter password"
               style={{
-                borderColor: err1 && fullname.length <= 0 ? "red" : "#cde4fe",
+                borderColor: err1 && password.length <= 0 ? "red" : "#cde4fe",
               }}
             />
 
@@ -262,7 +262,8 @@ const Mployeer = () => {
               onChange={(e) => SetConfirmPass(e.target.value)}
               placeholder="Confirm password"
               style={{
-                borderColor: err1 && fullname.length <= 0 ? "red" : "#cde4fe",
+                borderColor:
+                  err1 && confirmPass.length <= 0 ? "red" : "#cde4fe",
               }}
             />
 

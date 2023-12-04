@@ -334,6 +334,11 @@ const Home = () => {
     setMore(null);
   };
 
+  const handleApply = (id) => {
+    // console.log(id);
+    router.push(`/dashboard/application/${id}`);
+  };
+
   //console.log(data);
 
   return (
@@ -391,8 +396,10 @@ const Home = () => {
                         filtered?.map((item, i) => (
                           <JobCon key={i}>
                             <Hd>
-                              <Title>{item.title}</Title>
-                              <Btn2>Apply</Btn2>
+                              <Title>{item?.title}</Title>
+                              <Btn2 onClick={() => handleApply(item?._id)}>
+                                Apply
+                              </Btn2>
                             </Hd>
                             <PJ>Salary: {item.pay}</PJ>
                             <PJ>Job type: {item.type}</PJ>
@@ -404,7 +411,7 @@ const Home = () => {
                             </Desc>
                             {more === item._id ? (
                               <PJ
-                                onClick={() => handleClick2(item._id)}
+                                onClick={() => handleClick2(item?._id)}
                                 style={{
                                   cursor: "pointer",
                                   display: "flex",
@@ -417,7 +424,7 @@ const Home = () => {
                               </PJ>
                             ) : (
                               <PJ
-                                onClick={() => handleClick(item._id)}
+                                onClick={() => handleClick(item?._id)}
                                 style={{
                                   cursor: "pointer",
                                   display: "flex",

@@ -328,6 +328,14 @@ const ListJobs = () => {
       router.push("/employer/dashboard");
     }
   };
+
+  const handleApply = (id) => {
+    if (userDetails === "") {
+      router.push("/login");
+    } else {
+      router.push(`/dashboard/application/${id}`);
+    }
+  };
   return (
     <Div>
       <Wrapper>
@@ -373,7 +381,7 @@ const ListJobs = () => {
                     <JobCon key={i}>
                       <Head>
                         <Title>{item.title}</Title>
-                        <Btn2>Apply</Btn2>
+                        <Btn2 onClick={() => handleApply(item._id)}>Apply</Btn2>
                       </Head>
                       <PJ>Salary: {item.pay}</PJ>
                       <PJ>Job type: {item.type}</PJ>

@@ -120,6 +120,8 @@ const ResetPass = () => {
   const router = useRouter();
   const { token } = router.query;
 
+  //console.log(router.query);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password.length === 0 || confirmPass.length === 0) {
