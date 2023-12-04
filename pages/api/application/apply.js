@@ -31,10 +31,10 @@ export default async (req, res) => {
       }
 
       const search = await Application.findOne({
-        userId: userId,
+        jobId: jobId,
       });
 
-      //console.log(search);
+      console.log(search?.jobId);
 
       if (search?.jobId === jobId) {
         return res
