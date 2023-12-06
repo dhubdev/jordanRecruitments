@@ -9,11 +9,87 @@ import { toast } from "react-toastify";
 import styled from "styled-components";
 
 const Div = styled.div``;
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  //align-items: center;
+  //justify-content: center;
+  width: 75%;
+  padding: 2rem 0;
+  margin: 0 0 0 20rem;
+
+  gap: 2rem;
+
+  @media screen and (max-width: 1024px) {
+    width: 90%;
+  }
+
+  @media screen and (max-width: 600px) {
+    width: 92%;
+  }
+`;
+
+const H2 = styled.h2`
+  font-size: 2rem;
+  font-weight: 500;
+`;
+const AppDiv = styled.div`
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 2rem;
+`;
+const P = styled.p``;
+
+const AppInner = styled.div`
+  width: 18rem;
+  padding: 1.5rem;
+  border-radius: 7px;
+  box-shadow: 3px 3px 15px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  cursor: pointer;
+`;
+const Hd = styled.div`
+  display: flex;
+  align-items: center;
+
+  justify-content: space-between;
+`;
+const Flag = styled.div`
+  background: green;
+  color: #fff;
+  font-size: 0.7rem;
+  padding: 5px;
+  width: 4rem;
+  text-align: center;
+  border-radius: 10px;
+`;
+const H3 = styled.h3`
+  font-size: 1rem;
+`;
+const Det = styled.div`
+  padding: 1.5rem;
+  border: 1px solid #cde4fe;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 90%;
+`;
+
+const H32 = styled.h3`
+  font-size: 1.4rem;
+`;
 
 const Applications = () => {
   const { user, setUser } = useContext(UserContext);
   const [opt, setOpt] = useState("");
+  const [apps, setApps] = useState([]);
+  const [load, setLoad] = useState(false);
+  const [jobs, setJobs] = useState([]);
+  const [item, setItem] = useState([]);
 
   const router = useRouter();
 
@@ -30,7 +106,67 @@ const Applications = () => {
 
     setUser(userDetails);
     setOpt("/dashboard/applications");
+
+    findApps();
+    getJobs();
+
+    setTimeout(() => {
+      setLoad(true);
+    }, 2000);
   }, []);
+
+  const findApps = async () => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      const { data } = await axios.post(
+        `/api/application/getUserApp`,
+        {
+          userId: userDetails?.user?._id,
+        },
+        config
+      );
+      //toast.success(data?.status);
+      setApps(data?.result);
+    } catch (error) {
+      console.log(error.response);
+      toast.error(error.response.data.error);
+    }
+  };
+
+  const getJobs = async () => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      const { data } = await axios.get(`/api/jobs/getJobs`, {}, config);
+
+      setJobs(data?.result);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
+  //console.log(apps);
+
+  const arr = apps.map((app) =>
+    jobs?.filter((item, i) => {
+      return item?._id === app?.jobId;
+    })
+  );
+
+  const handleClick = (item) => {
+    setItem(item);
+  };
+
+  //console.log(arr);
 
   return (
     <>
@@ -44,7 +180,44 @@ const Applications = () => {
         {user?.length !== 0 && (
           <Div>
             <Sidebar option={opt} />
-            <Wrapper></Wrapper>
+            <Wrapper>
+              <H2>Your Applications</H2>
+              {apps?.length !== 0 && <P>Click cards to view job details. </P>}
+              <AppDiv>
+                {load && apps?.length === 0 && (
+                  <P>
+                    You have not applied for any job yet!
+                    <br />
+                    Go back home to apply for jobs.
+                  </P>
+                )}
+
+                {apps?.length !== 0 &&
+                  arr?.map((item, i) => (
+                    <AppInner key={i} onClick={() => handleClick(item[0])}>
+                      <Hd>
+                        <H3>{item[0]?.title}</H3>
+                        <Flag>Applied</Flag>
+                      </Hd>
+                      <P>{item[0]?.location}</P>
+                    </AppInner>
+                  ))}
+              </AppDiv>
+
+              {item?.length !== 0 && (
+                <Det>
+                  <H32>{item?.title}</H32>
+
+                  <P>Salary: {item?.pay}</P>
+                  <P>Job type: {item?.type}</P>
+                  <P>Location: {item?.location}</P>
+                  <P>{item?.desc}</P>
+
+                  <P>Duration: {item?.duration}</P>
+                  <P>Date posted: {item?.datePosted}</P>
+                </Det>
+              )}
+            </Wrapper>
           </Div>
         )}
       </div>

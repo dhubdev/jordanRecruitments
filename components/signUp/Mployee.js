@@ -118,6 +118,7 @@ const Mployee = () => {
   const [fullname, setFullname] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPass, SetConfirmPass] = useState("");
+  const [address, setAddress] = useState("");
 
   const router = useRouter();
 
@@ -146,7 +147,7 @@ const Mployee = () => {
 
       const { data } = await axios.post(
         `/api/auth/register`,
-        { email, fullname, phone, password, confirmPass, employeer },
+        { email, fullname, phone, password, confirmPass, employeer, address },
         config
       );
       toast.success(data?.status);

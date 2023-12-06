@@ -30,13 +30,19 @@ export default async (req, res) => {
         return res.status(422).json({ error: "Please fill all fields" });
       }
 
-      const search = await Application.findOne({
-        jobId: jobId,
+      const search = await Application.find({
+        userId: userId,
       });
 
-      console.log(search?.jobId);
+      //console.log(search);
 
-      if (search?.jobId === jobId) {
+      const filter = search?.filter((item, i) => {
+        return item?.jobId === jobId;
+      });
+
+      //console.log(filter);
+
+      if (filter.length !== 0) {
         return res
           .status(422)
           .json({ error: "You already applied for this job!" });
