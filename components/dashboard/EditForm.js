@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 //import { UserContext } from "../context/userContext";
 import axios from "axios";
 import { UserContext } from "@/context/userContext";
+import useSWR from "swr";
 
 const Div = styled.div`
   background: rgba(255, 255, 255, 0.5);
@@ -15,7 +16,10 @@ const Div = styled.div`
   flex-direction: column;
   padding: 2rem 0;
   gap: 2rem;
-  width: 90%;
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    padding: 0;
+  }
 `;
 
 const Head = styled.div`
@@ -37,11 +41,11 @@ const Form = styled.form`
   width: 100%;
 
   @media screen and (max-width: 1024px) {
-    width: 50%;
+    width: 100%;
   }
 
   @media screen and (max-width: 600px) {
-    width: 90%;
+    width: 100%;
   }
 `;
 const InputDiv = styled.div`
@@ -90,36 +94,44 @@ const EditForm = () => {
     ? JSON.parse(cookies?.userDetails)
     : "";
 
-  const getUser = async () => {
-    try {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
+  const fetcher = (url) =>
+    axios.post(url, { userId: userDetails?.user?._id }).then((res) => res.data);
+  const { data, error } = useSWR("/api/user/getUser", fetcher);
 
-      const { data } = await axios.post(
-        `/api/user/getUser`,
-        { userId: userDetails?.user?._id },
-        config
-      );
+  // const getUser = async () => {
+  //   try {
+  //     const config = {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     };
 
-      console.log(data?.result?.email);
-      setEmail(data?.result?.email);
-      setPhone(data?.result?.phone);
-      setFullname(data?.result?.fullname);
-      setAddress(data?.result?.address);
-      //console.log(data?.profile[0]);
-      //navigate("/login");
-    } catch (error) {
-      console.log(error.response);
-      toast.error(error.response.data.error);
-    }
-  };
+  //     const { data } = await axios.post(
+  //       `/api/user/getUser`,
+  //       { userId: userDetails?.user?._id },
+  //       config
+  //     );
+
+  //     console.log(data?.result?.email);
+  //     setEmail(data?.result?.email);
+  //     setPhone(data?.result?.phone);
+  //     setFullname(data?.result?.fullname);
+  //     setAddress(data?.result?.address);
+  //     //console.log(data?.profile[0]);
+  //     //navigate("/login");
+  //   } catch (error) {
+  //     console.log(error.response);
+  //     toast.error(error.response.data.error);
+  //   }
+  // };
 
   useEffect(() => {
-    getUser();
-  }, []);
+    setEmail(data?.result?.email);
+    setPhone(data?.result?.phone);
+    setFullname(data?.result?.fullname);
+    setAddress(data?.result?.address);
+    //getUser();
+  }, [data]);
 
   //console.log(profile);
 

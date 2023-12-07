@@ -14,13 +14,28 @@ import {
   MdArrowDropUp,
   MdOutlineSearch,
 } from "react-icons/md";
+import useSWR from "swr";
+import { CgMenuLeft } from "react-icons/cg";
 
 const Div = styled.div`
   position: relative;
   width: 100%;
 `;
+
+const DivHam = styled.div`
+  display: none;
+
+  @media screen and (max-width: 1024px) {
+    display: inline;
+    position: absolute;
+    left: 5%;
+    top: 1rem;
+    font-size: 2rem;
+  }
+`;
 const Wrapper = styled.div`
   display: flex;
+
   flex-direction: column;
   //align-items: center;
   //justify-content: center;
@@ -32,6 +47,8 @@ const Wrapper = styled.div`
 
   @media screen and (max-width: 1024px) {
     width: 90%;
+    margin: 0 auto;
+    padding: 4rem 0 2rem;
   }
 
   @media screen and (max-width: 600px) {
@@ -269,11 +286,15 @@ const PJ = styled.p`
 
 const Home = () => {
   const { user, setUser } = useContext(UserContext);
+  const { click, setClick } = useContext(UserContext);
   const [search, setSearch] = useState("");
   const [more, setMore] = useState(null);
 
   const [filtered, setFiltered] = useState([]);
-  const [data, setData] = useState([]);
+  const [dataR, setDataR] = useState([]);
+
+  const fetcher = (url) => axios.get(url).then((res) => res.data);
+  const { data, error } = useSWR("/api/jobs/getJobs", fetcher);
 
   const [opt, setOpt] = useState("");
 
@@ -285,38 +306,39 @@ const Home = () => {
     ? JSON.parse(cookies?.userDetails)
     : "";
 
-  const getPosts = async () => {
-    try {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
+  // const getPosts = async () => {
+  //   try {
+  //     const config = {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     };
 
-      const { data } = await axios.get(`/api/jobs/getJobs`, {}, config);
+  //     const { data } = await axios.get(`/api/jobs/getJobs`, {}, config);
 
-      setFiltered(data?.result);
-      setData(data?.result);
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
+  //     setFiltered(data?.result);
+  //     setDataR(data?.result);
+  //   } catch (error) {
+  //     console.log(error.response);
+  //   }
+  // };
 
   useEffect(() => {
     if (userDetails === "") {
       router.push("/login");
     }
 
-    getPosts();
+    setFiltered(data?.result);
+    setDataR(data?.result);
 
     setUser(userDetails);
     setOpt("/dashboard/home");
-  }, []);
+  }, [data]);
 
   const handelSubmit = (e) => {
     e.preventDefault();
     setSearch(e.target.value);
-    const filteredData = data.filter((item) => {
+    const filteredData = dataR.filter((item) => {
       return Object.values(item)
         .join("")
         .toLowerCase()
@@ -352,6 +374,11 @@ const Home = () => {
       <div>
         {user?.length !== 0 && (
           <Div>
+            {!click && (
+              <DivHam onClick={() => setClick(true)}>
+                <CgMenuLeft />
+              </DivHam>
+            )}
             <Sidebar option={opt} />
             <Wrapper>
               <TopCon>
@@ -391,7 +418,7 @@ const Home = () => {
                   <JobsCon>
                     <H3J>Available Jobs</H3J>
                     <InnerCon>
-                      {data?.length !== 0 &&
+                      {dataR?.length !== 0 &&
                         filtered?.length !== 0 &&
                         filtered?.map((item, i) => (
                           <JobCon key={i}>

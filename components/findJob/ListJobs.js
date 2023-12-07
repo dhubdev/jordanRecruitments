@@ -11,6 +11,7 @@ import {
 import { useRouter } from "next/router";
 import { parseCookies } from "nookies";
 import { UserContext } from "@/context/userContext";
+import useSWR from "swr";
 
 const Div = styled.div``;
 const Wrapper = styled.div`
@@ -268,7 +269,10 @@ const ListJobs = () => {
   const { user, setUser } = useContext(UserContext);
 
   const [filtered, setFiltered] = useState([]);
-  const [data, setData] = useState([]);
+  const [dataR, setDataR] = useState([]);
+
+  const fetcher = (url) => axios.get(url).then((res) => res.data);
+  const { data, error } = useSWR("/api/jobs/getJobs", fetcher);
 
   const router = useRouter();
 
@@ -278,27 +282,30 @@ const ListJobs = () => {
     ? JSON.parse(cookies?.userDetails)
     : "";
 
-  const getPosts = async () => {
-    try {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
+  //console.log(data);
 
-      const { data } = await axios.get(`/api/jobs/getJobs`, {}, config);
+  // const getPosts = async () => {
+  //   try {
+  //     const config = {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     };
 
-      setFiltered(data?.result);
-      setData(data?.result);
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
+  //     const { data } = await axios.get(`/api/jobs/getJobs`, {}, config);
+
+  //     setFiltered(data?.result);
+  //     setDataR(data?.result);
+  //   } catch (error) {
+  //     console.log(error.response);
+  //   }
+  // };
 
   useEffect(() => {
-    getPosts();
+    setFiltered(data?.result);
+    setDataR(data?.result);
     setUser(userDetails);
-  }, []);
+  }, [data]);
 
   const handelSubmit = (e) => {
     e.preventDefault();
@@ -375,7 +382,7 @@ const ListJobs = () => {
             <JobsCon>
               <H3J>Available Jobs</H3J>
               <InnerCon>
-                {data?.length !== 0 &&
+                {dataR?.length !== 0 &&
                   filtered?.length !== 0 &&
                   filtered?.map((item, i) => (
                     <JobCon key={i}>

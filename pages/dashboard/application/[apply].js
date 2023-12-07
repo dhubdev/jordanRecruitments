@@ -16,8 +16,22 @@ import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 import { BsFillImageFill } from "react-icons/bs";
+import useSWR from "swr";
+import { CgMenuLeft } from "react-icons/cg";
 
 const Div = styled.div``;
+
+const DivHam = styled.div`
+  display: none;
+
+  @media screen and (max-width: 1024px) {
+    display: inline;
+    position: absolute;
+    left: 5%;
+    top: 1rem;
+    font-size: 2rem;
+  }
+`;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -30,6 +44,9 @@ const Wrapper = styled.div`
 
   @media screen and (max-width: 1024px) {
     width: 90%;
+    margin: 0 auto;
+    padding: 4rem 0 2rem;
+    align-items: center;
   }
 
   @media screen and (max-width: 600px) {
@@ -43,7 +60,7 @@ const JobCon = styled.div`
   gap: 1.2rem;
 
   @media screen and (max-width: 600px) {
-    padding: 1.4rem 1rem;
+    padding: 1.4rem 0.5rem;
   }
 `;
 
@@ -60,7 +77,7 @@ const Title = styled.h3`
   font-size: 1.5rem;
 
   @media screen and (max-width: 600px) {
-    font-size: 1.2rem;
+    font-size: 1.6rem;
 
     width: 20rem;
   }
@@ -81,8 +98,13 @@ const Form = styled.form`
   box-shadow: 3px 3px 15px 0 rgba(0, 0, 0, 0.2);
   padding: 2rem 1.5rem;
 
+  @media screen and (max-width: 1024px) {
+    width: 95%;
+  }
+
   @media screen and (max-width: 600px) {
-    width: 100%;
+    width: 90%;
+    padding: 2rem 1rem;
   }
 `;
 const InputDiv = styled.div`
@@ -190,6 +212,7 @@ const Span = styled.span`
 
 const Apply = () => {
   const { user, setUser } = useContext(UserContext);
+  const { click, setClick } = useContext(UserContext);
   const [opt, setOpt] = useState("");
 
   const [err1, setErr1] = useState(false);
@@ -223,6 +246,10 @@ const Apply = () => {
     ? JSON.parse(cookies?.userDetails)
     : "";
 
+  // const fetcher = (url) =>
+  //   axios.post(url, { jobId: apply }).then((res) => res.data);
+  // const { data, error } = useSWR("/api/jobs/getJob", fetcher);
+
   useEffect(() => {
     if (userDetails === "") {
       router.push("/login");
@@ -231,6 +258,7 @@ const Apply = () => {
     setUser(userDetails);
     setOpt("/dashboard/applications");
     findJob();
+    //setJob(data?.result);
   }, [apply]);
 
   const findJob = async () => {
@@ -256,7 +284,7 @@ const Apply = () => {
     }
   };
 
-  //console.log(job);
+  //console.log(apply);
 
   const handleFile = (e) => {
     const image = e.target.files[0];
@@ -502,6 +530,11 @@ const Apply = () => {
       <div>
         {user?.length !== 0 && (
           <Div>
+            {!click && (
+              <DivHam onClick={() => setClick(true)}>
+                <CgMenuLeft />
+              </DivHam>
+            )}
             <Sidebar option={opt} />
 
             <Wrapper>

@@ -6,10 +6,24 @@ import Head from "next/head";
 import { useRouter } from "next/navigation";
 import { parseCookies } from "nookies";
 import { useContext, useEffect, useState } from "react";
+import { CgMenuLeft } from "react-icons/cg";
 import { toast } from "react-toastify";
 import styled from "styled-components";
+import useSWR from "swr";
 
 const Div = styled.div``;
+
+const DivHam = styled.div`
+  display: none;
+
+  @media screen and (max-width: 1024px) {
+    display: inline;
+    position: absolute;
+    left: 5%;
+    top: 1rem;
+    font-size: 2rem;
+  }
+`;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -23,6 +37,9 @@ const Wrapper = styled.div`
 
   @media screen and (max-width: 1024px) {
     width: 90%;
+    margin: 0 auto;
+    padding: 4rem 0 2rem;
+    align-items: center;
   }
 
   @media screen and (max-width: 600px) {
@@ -43,52 +60,64 @@ const ProfileCon = styled.div`
   border-radius: 7px;
   gap: 1rem;
   width: 19rem;
+  @media screen and (max-width: 1024px) {
+    width: 92%;
+  }
 `;
-const P = styled.p``;
+const P = styled.p`
+  font-size: 0.9rem;
+`;
 
 const Profile = () => {
   const { user, setUser } = useContext(UserContext);
+  const { click, setClick } = useContext(UserContext);
   const [opt, setOpt] = useState("");
 
   const router = useRouter();
 
   const cookies = parseCookies();
 
+  const fetcher = (url) =>
+    axios.post(url, { userId: userDetails?.user?._id }).then((res) => res.data);
+  const { data, error } = useSWR("/api/user/getUser", fetcher);
+
   const userDetails = cookies?.userDetails
     ? JSON.parse(cookies?.userDetails)
     : "";
 
-  const getUser = async () => {
-    try {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
+  // const getUser = async () => {
+  //   try {
+  //     const config = {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     };
 
-      const { data } = await axios.post(
-        `/api/user/getUser`,
-        { userId: userDetails?.user?._id },
-        config
-      );
+  //     const { data } = await axios.post(
+  //       `/api/user/getUser`,
+  //       { userId: userDetails?.user?._id },
+  //       config
+  //     );
 
-      setUser(data?.result);
-      //console.log(data?.profile[0]);
-      //navigate("/login");
-    } catch (error) {
-      console.log(error.response);
-      toast.error(error.response.data.error);
-    }
-  };
+  //     setUser(data?.result);
+  //     //console.log(data?.profile[0]);
+  //     //navigate("/login");
+  //   } catch (error) {
+  //     console.log(error.response);
+  //     toast.error(error.response.data.error);
+  //   }
+  // };
+
+  //console.log(data?.result);
 
   useEffect(() => {
     if (userDetails === "") {
       router.push("/login");
     }
 
-    getUser();
+    setUser(data?.result);
     setOpt("/dashboard/profile");
-  }, []);
+  }, [data]);
 
   return (
     <>
@@ -102,6 +131,11 @@ const Profile = () => {
         {user?.length !== 0 && (
           <Div>
             <Sidebar option={opt} />
+            {!click && (
+              <DivHam onClick={() => setClick(true)}>
+                <CgMenuLeft />
+              </DivHam>
+            )}
             <Wrapper>
               <H2>Your Profile</H2>
               <ProfileCon>

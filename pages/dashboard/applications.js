@@ -5,10 +5,23 @@ import Head from "next/head";
 import { useRouter } from "next/navigation";
 import { parseCookies } from "nookies";
 import { useContext, useEffect, useState } from "react";
+import { CgMenuLeft } from "react-icons/cg";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 
 const Div = styled.div``;
+
+const DivHam = styled.div`
+  display: none;
+
+  @media screen and (max-width: 1024px) {
+    display: inline;
+    position: absolute;
+    left: 5%;
+    top: 1rem;
+    font-size: 2rem;
+  }
+`;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -22,6 +35,9 @@ const Wrapper = styled.div`
 
   @media screen and (max-width: 1024px) {
     width: 90%;
+    margin: 0 auto;
+    padding: 4rem 0 2rem;
+    align-items: center;
   }
 
   @media screen and (max-width: 600px) {
@@ -38,8 +54,18 @@ const AppDiv = styled.div`
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 2rem;
+
+  @media screen and (max-width: 1024px) {
+    justify-content: center;
+  }
 `;
-const P = styled.p``;
+const P = styled.p`
+  @media screen and (max-width: 1024px) {
+    text-align: center;
+  }
+`;
+
+const P2 = styled.p``;
 
 const AppInner = styled.div`
   width: 18rem;
@@ -85,6 +111,7 @@ const H32 = styled.h3`
 
 const Applications = () => {
   const { user, setUser } = useContext(UserContext);
+  const { click, setClick } = useContext(UserContext);
   const [opt, setOpt] = useState("");
   const [apps, setApps] = useState([]);
   const [load, setLoad] = useState(false);
@@ -180,6 +207,11 @@ const Applications = () => {
         {user?.length !== 0 && (
           <Div>
             <Sidebar option={opt} />
+            {!click && (
+              <DivHam onClick={() => setClick(true)}>
+                <CgMenuLeft />
+              </DivHam>
+            )}
             <Wrapper>
               <H2>Your Applications</H2>
               {apps?.length !== 0 && <P>Click cards to view job details. </P>}
@@ -199,7 +231,7 @@ const Applications = () => {
                         <H3>{item[0]?.title}</H3>
                         <Flag>Applied</Flag>
                       </Hd>
-                      <P>{item[0]?.location}</P>
+                      <P2>{item[0]?.location}</P2>
                     </AppInner>
                   ))}
               </AppDiv>
@@ -208,13 +240,13 @@ const Applications = () => {
                 <Det>
                   <H32>{item?.title}</H32>
 
-                  <P>Salary: {item?.pay}</P>
-                  <P>Job type: {item?.type}</P>
-                  <P>Location: {item?.location}</P>
-                  <P>{item?.desc}</P>
+                  <P2>Salary: {item?.pay}</P2>
+                  <P2>Job type: {item?.type}</P2>
+                  <P2>Location: {item?.location}</P2>
+                  <P2>{item?.desc}</P2>
 
-                  <P>Duration: {item?.duration}</P>
-                  <P>Date posted: {item?.datePosted}</P>
+                  <P2>Duration: {item?.duration}</P2>
+                  <P2>Date posted: {item?.datePosted}</P2>
                 </Det>
               )}
             </Wrapper>

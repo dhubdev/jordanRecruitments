@@ -4,6 +4,7 @@ export const UserContext = createContext();
 
 export const UserContextProvider = (props) => {
   const [user, setUser] = useState([]);
+  const [click, setClick] = useState(false);
 
   const updatedUser = (item) => {
     setProfile(item);
@@ -16,6 +17,8 @@ export const UserContextProvider = (props) => {
         user,
         setUser,
         updatedUser,
+        click,
+        setClick,
       }}
     >
       {props.children}
