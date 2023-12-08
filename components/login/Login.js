@@ -145,7 +145,7 @@ const Login = () => {
       if (!data?.user?.employeer) {
         router.push("/dashboard/home");
       } else {
-        router.push("/employer/dashboard");
+        router.push("/employer/home");
       }
     } catch (error) {
       console.log(error.response);

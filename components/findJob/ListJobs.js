@@ -302,7 +302,7 @@ const ListJobs = () => {
   // };
 
   useEffect(() => {
-    setFiltered(data?.result);
+    setFiltered(data?.result?.reverse());
     setDataR(data?.result);
     setUser(userDetails);
   }, [data]);
@@ -426,7 +426,7 @@ const ListJobs = () => {
                         </PJ>
                       )}
                       <PJ>Duration: {item.duration}</PJ>
-                      <PJ>Date posted: {item.datePosted}</PJ>
+                      <PJ>Date posted: {item?.datePosted?.slice(0, 15)}</PJ>
                     </JobCon>
                   ))}
               </InnerCon>

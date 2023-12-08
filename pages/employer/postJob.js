@@ -1,5 +1,6 @@
-import EditForm from "@/components/dashboard/EditForm";
-import Sidebar from "@/components/dashboard/Sidebar";
+import EditForm2 from "@/components/dashboard/EditForm2";
+
+import Sidebar2 from "@/components/dashboard/Sidebar2";
 import { UserContext } from "@/context/userContext";
 import axios from "axios";
 import Head from "next/head";
@@ -33,7 +34,7 @@ const Wrapper = styled.div`
   padding: 2rem 0;
   margin: 0 0 0 20rem;
 
-  gap: 2rem;
+  gap: 1.5rem;
 
   @media screen and (max-width: 1024px) {
     width: 90%;
@@ -68,7 +69,7 @@ const P = styled.p`
   font-size: 0.9rem;
 `;
 
-const Profile = () => {
+const PostJob = () => {
   const { user, setUser } = useContext(UserContext);
   const { click, setClick } = useContext(UserContext);
   const [opt, setOpt] = useState("");
@@ -115,12 +116,8 @@ const Profile = () => {
       router.push("/login");
     }
 
-    if (userDetails?.user?.employeer) {
-      router.push("/employer/dashboard");
-    }
-
     setUser(data?.result);
-    setOpt("/dashboard/profile");
+    setOpt("/employer/postJob");
   }, [data]);
 
   return (
@@ -134,21 +131,16 @@ const Profile = () => {
       <div>
         {user?.length !== 0 && (
           <Div>
-            <Sidebar option={opt} />
+            <Sidebar2 option={opt} />
             {!click && (
               <DivHam onClick={() => setClick(true)}>
                 <CgMenuLeft />
               </DivHam>
             )}
             <Wrapper>
-              <H2>Your Profile</H2>
-              <ProfileCon>
-                <P>Name: {user?.fullname}</P>
-                <P>Email: {user?.email}</P>
-                <P>Phone: {user?.phone}</P>
-                {user?.address !== "" && <P>Address: {user?.address}</P>}
-              </ProfileCon>
-              <EditForm />
+              <H2>Post Job</H2>
+
+              <EditForm2 />
             </Wrapper>
           </Div>
         )}
@@ -157,4 +149,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default PostJob;

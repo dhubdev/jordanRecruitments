@@ -5,8 +5,7 @@ connectDB();
 export default async (req, res) => {
   try {
     if (req.method === "POST") {
-      const { userId, title, pay, type, desc, location, duration, datePosted } =
-        req.body;
+      const { userId, title, pay, type, desc, location, duration } = req.body;
       if (
         !userId ||
         !title ||
@@ -14,8 +13,7 @@ export default async (req, res) => {
         !type ||
         !desc ||
         !location ||
-        !duration ||
-        !datePosted
+        !duration
       ) {
         return res.status(422).json({ error: "Please fill all fields" });
       }
@@ -23,12 +21,13 @@ export default async (req, res) => {
       const newJob = await new Job({
         userId: userId,
         title: title,
-        pay: pay,
+        pay: "£" + pay,
         type: type,
         desc: desc,
         location: location,
         duration: duration,
-        datePosted: datePosted,
+        datePosted: new Date(),
+        apps: 0,
       }).save();
 
       res.status(201).json({

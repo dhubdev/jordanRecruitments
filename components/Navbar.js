@@ -195,7 +195,7 @@ const Navbar = () => {
     if (!userDetails?.user?.employeer) {
       router.push("/postJob/signUp");
     } else {
-      router.push("/employer/dashboard");
+      router.push("/employer/home");
     }
   };
 

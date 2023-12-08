@@ -1,5 +1,6 @@
 import EditForm from "@/components/dashboard/EditForm";
-import Sidebar from "@/components/dashboard/Sidebar";
+
+import Sidebar2 from "@/components/dashboard/Sidebar2";
 import { UserContext } from "@/context/userContext";
 import axios from "axios";
 import Head from "next/head";
@@ -115,12 +116,8 @@ const Profile = () => {
       router.push("/login");
     }
 
-    if (userDetails?.user?.employeer) {
-      router.push("/employer/dashboard");
-    }
-
     setUser(data?.result);
-    setOpt("/dashboard/profile");
+    setOpt("/employer/profile");
   }, [data]);
 
   return (
@@ -134,7 +131,7 @@ const Profile = () => {
       <div>
         {user?.length !== 0 && (
           <Div>
-            <Sidebar option={opt} />
+            <Sidebar2 option={opt} />
             {!click && (
               <DivHam onClick={() => setClick(true)}>
                 <CgMenuLeft />

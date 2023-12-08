@@ -159,7 +159,7 @@ const Mployeer = () => {
 
       cookie.set("userDetails", JSON.stringify(data));
 
-      router.push("/employer/dashboard");
+      router.push("/employer/home");
     } catch (error) {
       console.log(error.response);
       toast.error(error.response.data.error);

@@ -1,4 +1,4 @@
-import Sidebar from "@/components/dashboard/Sidebar";
+import Sidebar2 from "@/components/dashboard/Sidebar2";
 import { UserContext } from "@/context/userContext";
 import axios from "axios";
 import Head from "next/head";
@@ -8,6 +8,7 @@ import { useContext, useEffect, useState } from "react";
 import { CgMenuLeft } from "react-icons/cg";
 import { toast } from "react-toastify";
 import styled from "styled-components";
+import useSWR from "swr";
 
 const Div = styled.div``;
 
@@ -32,7 +33,6 @@ const Wrapper = styled.div`
   margin: 0 0 0 20rem;
 
   gap: 2rem;
-  position: relative;
 
   @media screen and (max-width: 1024px) {
     width: 90%;
@@ -43,6 +43,15 @@ const Wrapper = styled.div`
 
   @media screen and (max-width: 600px) {
     width: 92%;
+  }
+`;
+
+const Header = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  @media screen and (max-width: 1024px) {
+    align-items: center;
   }
 `;
 
@@ -89,7 +98,7 @@ const Flag = styled.div`
   color: #fff;
   font-size: 0.7rem;
   padding: 5px;
-  width: 4rem;
+  width: 6rem;
   text-align: center;
   border-radius: 10px;
 `;
@@ -110,15 +119,6 @@ const H32 = styled.h3`
   font-size: 1.4rem;
 `;
 
-const Header = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  @media screen and (max-width: 1024px) {
-    align-items: center;
-  }
-`;
-
 const Btn = styled.button`
   width: 10rem;
   height: 3rem;
@@ -135,46 +135,12 @@ const Btn = styled.button`
   cursor: pointer;
 `;
 
-const LoadDiv = styled.div`
-  width: 10rem;
-  height: 1rem;
-  border-radius: 7px;
-  background: #cde4fe;
-  position: absolute;
-  top: 20rem;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: 0 auto;
-`;
-const Loader = styled.div`
-  width: 2rem;
-  height: 1rem;
-  border-radius: 7px;
-  background-color: #5ba4fc;
-  animation: load infinite ease-in-out 2s;
-
-  @keyframes load {
-    0% {
-      transform: translateX(8rem);
-    }
-
-    50% {
-      transform: translateX(0);
-    }
-
-    100% {
-      transform: translateX(8rem);
-    }
-  }
-`;
-
 const Applications = () => {
   const { user, setUser } = useContext(UserContext);
   const { click, setClick } = useContext(UserContext);
   const [opt, setOpt] = useState("");
   const [apps, setApps] = useState([]);
-  const [load, setLoad] = useState(true);
+  const [load, setLoad] = useState(false);
   const [jobs, setJobs] = useState([]);
   const [item, setItem] = useState([]);
 
@@ -186,85 +152,48 @@ const Applications = () => {
     ? JSON.parse(cookies?.userDetails)
     : "";
 
+  const fetcher = (url) =>
+    axios.post(url, { userId: userDetails?.user?._id }).then((res) => res.data);
+  const { data, error } = useSWR("/api/jobs/getUserJobs", fetcher);
+
   useEffect(() => {
     if (userDetails === "") {
       router.push("/login");
     }
 
-    if (userDetails?.user?.employeer) {
-      router.push("/employer/dashboard");
-    }
-
     setUser(userDetails);
-    setOpt("/dashboard/applications");
+    setOpt("/employer/home");
 
-    findApps();
-    getJobs();
+    setJobs(data?.result?.reverse());
+  }, [data]);
 
-    setTimeout(() => {
-      setLoad(false);
-    }, 2000);
-  }, []);
+  // const getJobs = async () => {
+  //   try {
+  //     const config = {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     };
 
-  //console.log(apps?.length);
+  //     const { data } = await axios.get(`/api/jobs/getJobs`, {}, config);
 
-  const findApps = async () => {
-    try {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-
-      const { data } = await axios.post(
-        `/api/application/getUserApp`,
-        {
-          userId: userDetails?.user?._id,
-        },
-        config
-      );
-      //toast.success(data?.status);
-      setApps(data?.result?.reverse());
-      //setApps([]);
-    } catch (error) {
-      console.log(error.response);
-      toast.error(error.response.data.error);
-    }
-  };
-
-  const getJobs = async () => {
-    try {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-
-      const { data } = await axios.get(`/api/jobs/getJobs`, {}, config);
-
-      setJobs(data?.result);
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
+  //     setJobs(data?.result);
+  //   } catch (error) {
+  //     console.log(error.response);
+  //   }
+  // };
 
   //console.log(apps);
-
-  const arr = apps.map((app) =>
-    jobs?.filter((item, i) => {
-      return item?._id === app?.jobId;
-    })
-  );
 
   const handleClick = (item) => {
     setItem(item);
   };
 
   const handleRoute = () => {
-    router.push("/dashboard/home");
+    router.push("/employer/postJob");
   };
 
-  //console.log(arr);
+  console.log(userDetails?.user?._id);
 
   return (
     <>
@@ -277,43 +206,41 @@ const Applications = () => {
       <div>
         {user?.length !== 0 && (
           <Div>
-            <Sidebar option={opt} />
+            <Sidebar2 option={opt} />
             {!click && (
               <DivHam onClick={() => setClick(true)}>
                 <CgMenuLeft />
               </DivHam>
             )}
             <Wrapper>
-              {load && (
-                <LoadDiv>
-                  <Loader />
-                </LoadDiv>
+              <H2>Welcome!</H2>
+              {jobs?.length !== 0 && (
+                <Header>
+                  <P>Here are the jobs you posted.</P>
+                  <P>Click cards to view job details. </P>
+                </Header>
               )}
-              {!load && <H2>Your Applications</H2>}
-              {!load && apps?.length !== 0 && (
-                <P>Click cards to view job details. </P>
+
+              {jobs?.length === 0 && (
+                <Header>
+                  <P>
+                    You haven't post any job yet. <br />
+                    Go to post jobs to start.
+                  </P>
+                  <Btn onClick={handleRoute}>Post Job</Btn>
+                </Header>
               )}
               <AppDiv>
-                {!load && apps?.length === 0 && (
-                  <Header>
-                    <P>
-                      You have not applied for any job yet!
-                      <br />
-                      Go back home to apply for jobs.
-                    </P>
-                    <Btn onClick={handleRoute}>Go Home</Btn>
-                  </Header>
-                )}
-
-                {!load &&
-                  apps?.length !== 0 &&
-                  arr?.map((item, i) => (
-                    <AppInner key={i} onClick={() => handleClick(item[0])}>
+                {jobs?.length !== 0 &&
+                  jobs?.map((item, i) => (
+                    <AppInner key={i} onClick={() => handleClick(item)}>
                       <Hd>
-                        <H3>{item[0]?.title}</H3>
-                        <Flag>Applied</Flag>
+                        <H3>{item?.title}</H3>
+                        <Flag>
+                          {item?.apps} application{item?.apps > 1 && "s"}
+                        </Flag>
                       </Hd>
-                      <P2>{item[0]?.location}</P2>
+                      <P2>{item?.location}</P2>
                     </AppInner>
                   ))}
               </AppDiv>

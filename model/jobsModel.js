@@ -28,6 +28,10 @@ const jobSchema = mongoose.Schema({
     type: String,
   },
 
+  apps: {
+    type: Number,
+  },
+
   datePosted: {
     type: String,
   },

@@ -328,7 +328,11 @@ const Home = () => {
       router.push("/login");
     }
 
-    setFiltered(data?.result);
+    if (userDetails?.user?.employeer) {
+      router.push("/employer/dashboard");
+    }
+
+    setFiltered(data?.result?.reverse());
     setDataR(data?.result);
 
     setUser(userDetails);
@@ -464,7 +468,9 @@ const Home = () => {
                               </PJ>
                             )}
                             <PJ>Duration: {item.duration}</PJ>
-                            <PJ>Date posted: {item.datePosted}</PJ>
+                            <PJ>
+                              Date posted: {item?.datePosted?.slice(0, 15)}
+                            </PJ>
                           </JobCon>
                         ))}
                     </InnerCon>

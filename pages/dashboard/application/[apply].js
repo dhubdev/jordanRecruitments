@@ -255,6 +255,10 @@ const Apply = () => {
       router.push("/login");
     }
 
+    if (userDetails?.user?.employeer) {
+      router.push("/employer/dashboard");
+    }
+
     setUser(userDetails);
     setOpt("/dashboard/applications");
     findJob();
@@ -316,6 +320,30 @@ const Apply = () => {
     }
   };
 
+  const updateApp = async () => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      const { data } = await axios.patch(
+        `/api/jobs/updateJob`,
+        {
+          id: apply,
+          apps: job?.apps + 1,
+        },
+        config
+      );
+
+      //router.push("/employer/dashboard");
+    } catch (error) {
+      console.log(error.response);
+      toast.error(error.response.data.error);
+    }
+  };
+
   const handleDataUpload = async () => {
     let userId = user?.user?._id;
     try {
@@ -341,6 +369,7 @@ const Apply = () => {
         config
       );
       toast.success(data?.status);
+      updateApp();
 
       setEmail("");
       setFullname("");
@@ -548,7 +577,7 @@ const Apply = () => {
                 <Desc>{job?.desc}</Desc>
 
                 <PJ>Duration: {job?.duration}</PJ>
-                <PJ>Date posted: {job?.datePosted}</PJ>
+                <PJ>Date posted: {job?.datePosted?.slice(0, 15)}</PJ>
               </JobCon>
 
               <Form onSubmit={handleSubmit}>

@@ -23,7 +23,7 @@ export default function SignUp() {
       if (!userDetails?.user?.employeer) {
         router.push("/dashboard/home");
       } else {
-        router.push("/employer/dashboard");
+        router.push("/employer/home");
       }
     }
   }, []);
