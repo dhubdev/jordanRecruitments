@@ -33,6 +33,7 @@ const Wrapper = styled.div`
   margin: 0 0 0 20rem;
 
   gap: 2rem;
+  position: relative;
 
   @media screen and (max-width: 1024px) {
     width: 90%;
@@ -135,12 +136,46 @@ const Btn = styled.button`
   cursor: pointer;
 `;
 
+const LoadDiv = styled.div`
+  width: 10rem;
+  height: 1rem;
+  border-radius: 7px;
+  background: #cde4fe;
+  position: absolute;
+  top: 20rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+`;
+const Loader = styled.div`
+  width: 2rem;
+  height: 1rem;
+  border-radius: 7px;
+  background-color: #5ba4fc;
+  animation: load infinite ease-in-out 2s;
+
+  @keyframes load {
+    0% {
+      transform: translateX(8rem);
+    }
+
+    50% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(8rem);
+    }
+  }
+`;
+
 const Applications = () => {
   const { user, setUser } = useContext(UserContext);
   const { click, setClick } = useContext(UserContext);
   const [opt, setOpt] = useState("");
   const [apps, setApps] = useState([]);
-  const [load, setLoad] = useState(false);
+  const [load, setLoad] = useState(true);
   const [jobs, setJobs] = useState([]);
   const [item, setItem] = useState([]);
 
@@ -163,6 +198,10 @@ const Applications = () => {
 
     setUser(userDetails);
     setOpt("/employer/home");
+
+    setTimeout(() => {
+      setLoad(false);
+    }, 2000);
 
     setJobs(data?.result?.reverse());
   }, [data]);
@@ -213,15 +252,21 @@ const Applications = () => {
               </DivHam>
             )}
             <Wrapper>
-              <H2>Welcome!</H2>
-              {jobs?.length !== 0 && (
+              {load && (
+                <LoadDiv>
+                  <Loader />
+                </LoadDiv>
+              )}
+
+              {!load && <H2>Welcome!</H2>}
+              {!load && jobs?.length !== 0 && (
                 <Header>
                   <P>Here are the jobs you posted.</P>
                   <P>Click cards to view job details. </P>
                 </Header>
               )}
 
-              {jobs?.length === 0 && (
+              {!load && jobs?.length === 0 && (
                 <Header>
                   <P>
                     You haven't post any job yet. <br />
@@ -231,7 +276,8 @@ const Applications = () => {
                 </Header>
               )}
               <AppDiv>
-                {jobs?.length !== 0 &&
+                {!load &&
+                  jobs?.length !== 0 &&
                   jobs?.map((item, i) => (
                     <AppInner key={i} onClick={() => handleClick(item)}>
                       <Hd>
