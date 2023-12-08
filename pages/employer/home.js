@@ -21,6 +21,7 @@ const DivHam = styled.div`
     left: 5%;
     top: 1rem;
     font-size: 2rem;
+    z-index: 10;
   }
 `;
 const Wrapper = styled.div`
@@ -245,12 +246,13 @@ const Applications = () => {
       <div>
         {user?.length !== 0 && (
           <Div>
-            <Sidebar2 option={opt} />
             {!click && (
               <DivHam onClick={() => setClick(true)}>
                 <CgMenuLeft />
               </DivHam>
             )}
+            <Sidebar2 option={opt} />
+
             <Wrapper>
               {load && (
                 <LoadDiv>

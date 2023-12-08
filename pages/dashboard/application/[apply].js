@@ -30,6 +30,7 @@ const DivHam = styled.div`
     left: 5%;
     top: 1rem;
     font-size: 2rem;
+    z-index: 10;
   }
 `;
 const Wrapper = styled.div`
