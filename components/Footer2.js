@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { BsInstagram } from "react-icons/bs";
+import { BsFillTelephoneFill, BsInstagram } from "react-icons/bs";
 import { FaFacebookF } from "react-icons/fa";
 import { AiOutlineYoutube } from "react-icons/ai";
 import { ImLinkedin2 } from "react-icons/im";
@@ -190,7 +190,7 @@ const Footer2 = () => {
             <LinkHead>Connect</LinkHead>
 
             <Socials>
-              <NewLink href="">
+              <NewLink href="https://instagram.com/jordan_recruitments?igshid=OGQ5ZDc2ODk2ZA==">
                 <BsInstagram />
               </NewLink>
               <NewLink href="">
@@ -215,14 +215,22 @@ const Footer2 = () => {
               <Li>
                 <NewLink href="">Career</NewLink>
               </Li>
+              <Li>
+                <NewLink href="/privacy">Privacy policy</NewLink>
+              </Li>
+              <Li>
+                <NewLink href="/cookie">Cookie policy</NewLink>
+              </Li>
             </Ul>
           </Links>
 
           <Contact>
             <LinkHead>Contact Us</LinkHead>
             <Ul>
-              <Li>info@jordanrecruitments.com</Li>
-              <Li>+44 000 000 0000</Li>
+              <Li>info@jordanrecruitments.co.uk</Li>
+              <Li style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+                <BsFillTelephoneFill /> 07930739927
+              </Li>
               <Li>
                 <NewLink href="">
                   <IoLogoWhatsapp

@@ -85,6 +85,26 @@ const Btn = styled.button`
   cursor: pointer;
 `;
 
+const A = styled.a`
+  width: 9rem;
+  height: 3rem;
+  font-family: inherit;
+  border: none;
+  background-color: #5ba4fc;
+  color: #fff;
+  border: 1px solid #5ba4fc;
+
+  border-radius: 5px;
+  box-shadow: 3px 3px 15px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+  font-size: 0.9rem;
+`;
+
 const JoinTeam = () => {
   return (
     <Div>
@@ -108,7 +128,7 @@ const JoinTeam = () => {
               than just a company; we're a community of dedicated professionals
               working together to redefine the future of careers.
             </P>
-            <Btn>Join now</Btn>
+            <A href="mailto:info@jordanrecruitments.co.uk">Join now</A>
           </Right>
         </Con>
       </Wrapper>

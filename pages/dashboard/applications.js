@@ -138,7 +138,7 @@ const Btn = styled.button`
 
 const LoadDiv = styled.div`
   width: 10rem;
-  height: 1rem;
+  height: 0.5rem;
   border-radius: 7px;
   background: #cde4fe;
   position: absolute;
@@ -150,10 +150,11 @@ const LoadDiv = styled.div`
 `;
 const Loader = styled.div`
   width: 2rem;
-  height: 1rem;
+  height: 0.5rem;
   border-radius: 7px;
   background-color: #5ba4fc;
   animation: load infinite ease-in-out 2s;
+  box-shadow: 3px 3px 15px 0 rgba(0, 0, 0, 0.2);
 
   @keyframes load {
     0% {

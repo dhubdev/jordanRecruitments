@@ -53,6 +53,20 @@ const InputDiv = styled.div`
   flex-direction: column;
   width: 100%;
   position: relative;
+
+  @media screen and (max-width: 1024px) {
+    .pound {
+      width: 92%;
+      padding: 0 4%;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .pound {
+      width: 86%;
+      padding: 0 7%;
+    }
+  }
 `;
 const Label = styled.label`
   font-size: 0.9rem;
@@ -226,6 +240,7 @@ const EditForm2 = () => {
           <InputDiv>
             <Label>Salary</Label>
             <Input
+              className={"pound"}
               placeholder="500"
               onChange={(e) => setPay(e.target.value)}
               value={pay}

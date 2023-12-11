@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 
 const Div = styled.div`
@@ -64,6 +65,7 @@ const Btn = styled.button`
   cursor: pointer;
 `;
 const Join = () => {
+  const router = useRouter();
   return (
     <Div>
       <Wrapper>
@@ -80,7 +82,7 @@ const Join = () => {
           embark on a journey to a brighter, more fulfilling career. Your dream
           job is just a click away!
         </P>
-        <Btn>Sign Up</Btn>
+        <Btn onClick={() => router.push("/signUp")}>Sign Up</Btn>
       </Wrapper>
     </Div>
   );

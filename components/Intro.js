@@ -1,5 +1,6 @@
 import { UserContext } from "@/context/userContext";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { parseCookies } from "nookies";
 import { useContext, useEffect } from "react";
 import styled from "styled-components";
@@ -100,6 +101,7 @@ const Btn = styled.button`
 
 const Intro = () => {
   const { user, setUser } = useContext(UserContext);
+  const router = useRouter();
 
   // const cookies = parseCookies();
 
@@ -132,7 +134,7 @@ const Intro = () => {
           further! Jordan Recruitments is your go-to destination for connecting
           with the best employers and discovering the job of your dreams
         </P>
-        <Btn>Get Started</Btn>
+        <Btn onClick={() => router.push("/signUp")}>Get Started</Btn>
       </Wrapper>
     </Div>
   );

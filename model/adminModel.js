@@ -15,9 +15,6 @@ const adminSchema = mongoose.Schema({
   isAdmin: {
     type: Boolean,
   },
-
-  resetToken: { type: String },
-  emailToken: { type: String },
 });
 
 export default mongoose.models.Admin || mongoose.model("Admin", adminSchema);
