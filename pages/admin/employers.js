@@ -119,7 +119,7 @@ const Employers = () => {
   }, []);
 
   const handleUser = (item) => {
-    cookie.set("userDetails", JSON.stringify(item));
+    cookie.set("userDetailsAd", JSON.stringify(item));
     router.push("/admin/userDetails");
   };
 
