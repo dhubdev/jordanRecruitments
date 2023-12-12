@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { UserContext } from "@/context/userContext";
 import useSWR from "swr";
+import { useRouter } from "next/router";
 
 const Div = styled.div`
   background: rgba(255, 255, 255, 0.5);
@@ -73,8 +74,8 @@ const Label = styled.label`
 `;
 const Input = styled.input`
   outline: none;
-  width: 95%;
-  padding: 0 2.5%;
+  width: 96%;
+  padding: 0 2%;
   height: 2.5rem;
   border: 1px solid #d1e2ff;
   font-family: inherit;
@@ -84,7 +85,7 @@ const Input = styled.input`
 
 const Pound = styled.div`
   position: absolute;
-  top: 47%;
+  top: 46%;
   left: 0.7rem;
 `;
 const TextField = styled.textarea`
@@ -111,7 +112,7 @@ const Btn = styled.button`
   cursor: pointer;
 `;
 
-const EditForm2 = () => {
+const EditForm3 = () => {
   const [title, setTitle] = useState("");
   const [pay, setPay] = useState("");
   const [desc, setDesc] = useState("");
@@ -119,15 +120,32 @@ const EditForm2 = () => {
   const [location, setLocation] = useState("");
   const [duration, setDuration] = useState("");
   const [err1, setErr1] = useState(false);
+  //const [job, setJob] = useState([]);
 
-  const { updatedUser, user, setUser } = useContext(UserContext);
+  const router = useRouter();
 
   const cookies = parseCookies();
   const userDetails = cookies?.userDetails
     ? JSON.parse(cookies?.userDetails)
     : "";
 
-  //console.log(profile);
+  const jobId = cookies?.jobId ? JSON.parse(cookies?.jobId) : "";
+
+  const fetcher = (url) =>
+    axios.post(url, { jobId: jobId }).then((res) => res.data);
+  const { data, error } = useSWR("/api/jobs/getJob", fetcher);
+
+  useEffect(() => {
+    console.log(data);
+    setTitle(data?.result?.title);
+    setDuration(data?.result?.duration);
+    setLocation(data?.result?.location);
+    setPay(data?.result?.pay);
+    setDesc(data?.result?.desc);
+    setType(data?.result?.type);
+  }, [data]);
+
+  console.log(jobId);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -152,10 +170,10 @@ const EditForm2 = () => {
         },
       };
 
-      const { data } = await axios.post(
-        `/api/jobs/postJobs`,
+      const { data } = await axios.patch(
+        `/api/jobs/patchJob`,
         {
-          userId: userDetails?.user?._id,
+          jobId: jobId,
           title,
           pay,
           location,
@@ -167,12 +185,7 @@ const EditForm2 = () => {
       );
       toast.success(data?.status);
 
-      setTitle("");
-      setDesc("");
-      setPay("");
-      setDuration("");
-      setLocation("");
-      setType("");
+      router.push("/admin/jobs");
 
       //console.log(data);
       //console.log(data?.profile[0]);
@@ -246,7 +259,6 @@ const EditForm2 = () => {
               value={pay}
               style={{ borderColor: err1 && pay.length <= 0 && "red" }}
             />
-            <Pound>£</Pound>
           </InputDiv>
 
           <InputDiv>
@@ -258,4 +270,4 @@ const EditForm2 = () => {
   );
 };
 
-export default EditForm2;
+export default EditForm3;

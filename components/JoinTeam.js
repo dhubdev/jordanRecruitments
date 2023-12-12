@@ -128,7 +128,7 @@ const JoinTeam = () => {
               than just a company; we're a community of dedicated professionals
               working together to redefine the future of careers.
             </P>
-            <A href="mailto:info@jordanrecruitments.co.uk">Join now</A>
+            <A href="mailto:info@jordanrecruitments.com">Join now</A>
           </Right>
         </Con>
       </Wrapper>

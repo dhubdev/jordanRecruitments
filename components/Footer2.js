@@ -7,6 +7,7 @@ import { ImLinkedin2 } from "react-icons/im";
 import { IoLogoWhatsapp } from "react-icons/io";
 import Link from "next/link";
 import Image from "next/image";
+import { MdEmail } from "react-icons/md";
 
 const FooterCon = styled.div`
   margin-top: 2rem;
@@ -111,7 +112,7 @@ const Socials = styled.div`
 const Links = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 
   @media screen and (max-width: 600px) {
     align-items: flex-start;
@@ -141,7 +142,7 @@ const Ul = styled.ul`
 const Li = styled.li`
   color: #fff;
   font-size: 0.9rem;
-  width: 12rem;
+  width: 15rem;
 `;
 const Contact = styled.div`
   display: flex;
@@ -227,14 +228,18 @@ const Footer2 = () => {
           <Contact>
             <LinkHead>Contact Us</LinkHead>
             <Ul>
-              <Li>info@jordanrecruitments.co.uk</Li>
               <Li style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                <BsFillTelephoneFill /> 07930739927
+                <MdEmail style={{ fontSize: "1.2rem" }} />
+                info@jordanrecruitments.com
+              </Li>
+              <Li style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+                <BsFillTelephoneFill style={{ fontSize: "1.2rem" }} />{" "}
+                <span>01612121379, 07930739927</span>
               </Li>
               <Li>
                 <NewLink href="">
                   <IoLogoWhatsapp
-                    style={{ fontSize: "1.4rem", marginRight: "0.2rem" }}
+                    style={{ fontSize: "1.2rem", marginRight: "5px" }}
                   />{" "}
                   <p style={{ margin: "0", padding: "0" }}>Whatsapp</p>
                 </NewLink>

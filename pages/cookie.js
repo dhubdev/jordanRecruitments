@@ -100,7 +100,7 @@ const Cookie = () => {
           <H3>Contact Information</H3>
           <P>
             If you have any questions or concerns about this cookie policy,
-            please contact us at info@jordanrecruitments.co.Uk
+            please contact us at info@jordanrecruitments.com.
           </P>
         </PriCon>
       </PriDiv>

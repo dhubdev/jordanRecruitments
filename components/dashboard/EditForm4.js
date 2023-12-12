@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { UserContext } from "@/context/userContext";
 import useSWR from "swr";
+import { useRouter } from "next/router";
 
 const Div = styled.div`
   background: rgba(255, 255, 255, 0.5);
@@ -111,7 +112,7 @@ const Btn = styled.button`
   cursor: pointer;
 `;
 
-const EditForm2 = () => {
+const EditForm4 = () => {
   const [title, setTitle] = useState("");
   const [pay, setPay] = useState("");
   const [desc, setDesc] = useState("");
@@ -120,15 +121,13 @@ const EditForm2 = () => {
   const [duration, setDuration] = useState("");
   const [err1, setErr1] = useState(false);
 
-  const { updatedUser, user, setUser } = useContext(UserContext);
+  const router = useRouter();
 
   const cookies = parseCookies();
-  const userDetails = cookies?.userDetails
-    ? JSON.parse(cookies?.userDetails)
-    : "";
+  const admin = cookies?.admin ? JSON.parse(cookies?.admin) : "";
 
   //console.log(profile);
-
+  //console.log(admin?._id);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -155,7 +154,7 @@ const EditForm2 = () => {
       const { data } = await axios.post(
         `/api/jobs/postJobs`,
         {
-          userId: userDetails?.user?._id,
+          userId: admin?._id,
           title,
           pay,
           location,
@@ -167,12 +166,7 @@ const EditForm2 = () => {
       );
       toast.success(data?.status);
 
-      setTitle("");
-      setDesc("");
-      setPay("");
-      setDuration("");
-      setLocation("");
-      setType("");
+      router.push("/admin/jobs");
 
       //console.log(data);
       //console.log(data?.profile[0]);
@@ -258,4 +252,4 @@ const EditForm2 = () => {
   );
 };
 
-export default EditForm2;
+export default EditForm4;

@@ -21,7 +21,7 @@ export default async (req, res) => {
       const newJob = await new Job({
         userId: userId,
         title: title,
-        pay: "£" + pay,
+        pay: "£ " + pay,
         type: type,
         desc: desc,
         location: location,

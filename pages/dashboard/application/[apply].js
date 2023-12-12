@@ -18,6 +18,7 @@ import styled from "styled-components";
 import { BsFillImageFill } from "react-icons/bs";
 import useSWR from "swr";
 import { CgMenuLeft } from "react-icons/cg";
+import { MdFileUpload } from "react-icons/md";
 
 const Div = styled.div``;
 
@@ -42,6 +43,7 @@ const Wrapper = styled.div`
   margin: 0 0 0 20rem;
 
   gap: 2rem;
+  position: relative;
 
   @media screen and (max-width: 1024px) {
     width: 90%;
@@ -211,6 +213,41 @@ const Span = styled.span`
   }
 `;
 
+const LoadDiv = styled.div`
+  width: 10rem;
+  height: 0.5rem;
+  border-radius: 7px;
+  background: #cde4fe;
+  position: absolute;
+  top: 20rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+`;
+const Loader = styled.div`
+  width: 2rem;
+  height: 0.5rem;
+  border-radius: 7px;
+  background-color: #5ba4fc;
+  animation: load infinite ease-in-out 2s;
+  box-shadow: 3px 3px 15px 0 rgba(0, 0, 0, 0.2);
+
+  @keyframes load {
+    0% {
+      transform: translateX(8rem);
+    }
+
+    50% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(8rem);
+    }
+  }
+`;
+
 const Apply = () => {
   const { user, setUser } = useContext(UserContext);
   const { click, setClick } = useContext(UserContext);
@@ -231,6 +268,7 @@ const Apply = () => {
   const [doc2, setDoc2] = useState("");
   const [doc3, setDoc3] = useState("");
   const [job, setJob] = useState([]);
+  const [load, setLoad] = useState(true);
 
   const router = useRouter();
   //   const param = useParams();
@@ -263,6 +301,10 @@ const Apply = () => {
     setUser(userDetails);
     setOpt("/dashboard/applications");
     findJob();
+
+    setTimeout(() => {
+      setLoad(false);
+    }, 2000);
     //setJob(data?.result);
   }, [apply]);
 
@@ -568,155 +610,164 @@ const Apply = () => {
             <Sidebar option={opt} />
 
             <Wrapper>
-              <JobCon>
-                <Hd>
-                  <Title>{job?.title}</Title>
-                </Hd>
-                <PJ>Salary: {job?.pay}</PJ>
-                <PJ>Job type: {job?.type}</PJ>
-                <PJ>Location: {job?.location}</PJ>
-                <Desc>{job?.desc}</Desc>
+              {load && (
+                <LoadDiv>
+                  <Loader />
+                </LoadDiv>
+              )}
+              {!load && (
+                <JobCon>
+                  <Hd>
+                    <Title>{job?.title}</Title>
+                  </Hd>
+                  <PJ>Salary: {job?.pay}</PJ>
+                  <PJ>Job type: {job?.type}</PJ>
+                  <PJ>Location: {job?.location}</PJ>
+                  <Desc>{job?.desc}</Desc>
 
-                <PJ>Duration: {job?.duration}</PJ>
-                <PJ>Date posted: {job?.datePosted?.slice(0, 15)}</PJ>
-              </JobCon>
+                  <PJ>Duration: {job?.duration}</PJ>
+                  <PJ>Date posted: {job?.datePosted?.slice(0, 15)}</PJ>
+                </JobCon>
+              )}
 
-              <Form onSubmit={handleSubmit}>
-                <InputDiv>
-                  <H3>Fill the form below</H3>
-                </InputDiv>
-                <InputDiv>
-                  <Label>Full Name</Label>
-                  <Input
-                    value={fullname}
-                    onChange={(e) => setFullname(e.target.value)}
-                    placeholder="John Alfred"
-                    style={{
-                      borderColor:
-                        err1 && fullname.length <= 0 ? "red" : "#cde4fe",
-                    }}
-                  />
-                </InputDiv>
-                <InputDiv>
-                  <Label>Email Address</Label>
-                  <Input
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="john@gmail.com"
-                    style={{
-                      borderColor:
-                        err1 && email.length <= 0 ? "red" : "#cde4fe",
-                    }}
-                  />
-                </InputDiv>
-                <InputDiv>
-                  <Label>House Address</Label>
-                  <Input
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    placeholder="Enter address"
-                    style={{
-                      borderColor:
-                        err1 && address.length <= 0 ? "red" : "#cde4fe",
-                    }}
-                  />
-                </InputDiv>
+              {!load && (
+                <Form onSubmit={handleSubmit}>
+                  <InputDiv>
+                    <H3>Fill the form below</H3>
+                  </InputDiv>
+                  <InputDiv>
+                    <Label>Full Name</Label>
+                    <Input
+                      value={fullname}
+                      onChange={(e) => setFullname(e.target.value)}
+                      placeholder="John Alfred"
+                      style={{
+                        borderColor:
+                          err1 && fullname.length <= 0 ? "red" : "#cde4fe",
+                      }}
+                    />
+                  </InputDiv>
+                  <InputDiv>
+                    <Label>Email Address</Label>
+                    <Input
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="john@gmail.com"
+                      style={{
+                        borderColor:
+                          err1 && email.length <= 0 ? "red" : "#cde4fe",
+                      }}
+                    />
+                  </InputDiv>
+                  <InputDiv>
+                    <Label>House Address</Label>
+                    <Input
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
+                      placeholder="Enter address"
+                      style={{
+                        borderColor:
+                          err1 && address.length <= 0 ? "red" : "#cde4fe",
+                      }}
+                    />
+                  </InputDiv>
 
-                <InputDiv>
-                  <Label>When did you move in?</Label>
-                  <Input
-                    value={moveIn}
-                    onChange={(e) => setMoveIn(e.target.value)}
-                    placeholder="Type here"
-                    style={{
-                      borderColor:
-                        err1 && moveIn.length <= 0 ? "red" : "#cde4fe",
-                    }}
-                  />
-                </InputDiv>
+                  <InputDiv>
+                    <Label>When did you move in?</Label>
+                    <Input
+                      value={moveIn}
+                      onChange={(e) => setMoveIn(e.target.value)}
+                      placeholder="Type here"
+                      style={{
+                        borderColor:
+                          err1 && moveIn.length <= 0 ? "red" : "#cde4fe",
+                      }}
+                    />
+                  </InputDiv>
 
-                <InputDiv>
-                  <Label>Upload CV</Label>
+                  <InputDiv>
+                    <Label>Upload CV</Label>
 
-                  <Input
-                    onChange={(e) => handleFile(e)}
-                    type="file"
-                    id="file"
-                  />
+                    <Input
+                      onChange={(e) => handleFile(e)}
+                      type="file"
+                      id="file"
+                    />
 
-                  <Label2 htmlFor="file">
-                    <BsFillImageFill style={{ opacity: "0.3" }} />
-                    <Span style={{ fontSize: "0.8rem", textAlign: "center" }}>
-                      Only files with 10mb max size are allowed
-                    </Span>
-                    {file && file?.size < 10000000 && (
-                      <span style={{ fontSize: "0.8rem" }}>{file.name}</span>
-                    )}
-
-                    <BigBar>
-                      {progress !== null && (
-                        <ProgressBar width={`${progress}%`} />
+                    <Label2 htmlFor="file">
+                      <MdFileUpload style={{ opacity: "0.3" }} />
+                      <Span style={{ fontSize: "0.8rem", textAlign: "center" }}>
+                        Only files with 10mb max size are allowed
+                      </Span>
+                      {file && file?.size < 10000000 && (
+                        <span style={{ fontSize: "0.8rem" }}>{file.name}</span>
                       )}
-                    </BigBar>
-                  </Label2>
-                </InputDiv>
 
-                <InputDiv>
-                  <Label>Upload Right to Work</Label>
+                      <BigBar>
+                        {progress !== null && (
+                          <ProgressBar width={`${progress}%`} />
+                        )}
+                      </BigBar>
+                    </Label2>
+                  </InputDiv>
 
-                  <Input
-                    onChange={(e) => handleFile2(e)}
-                    type="file"
-                    id="file2"
-                  />
+                  <InputDiv>
+                    <Label>Upload Right to Work</Label>
 
-                  <Label2 htmlFor="file2">
-                    <BsFillImageFill style={{ opacity: "0.3" }} />
-                    <Span style={{ fontSize: "0.8rem", textAlign: "center" }}>
-                      Only files with 10mb max size are allowed
-                    </Span>
-                    {file2 && file2?.size < 10000000 && (
-                      <span style={{ fontSize: "0.8rem" }}>{file2.name}</span>
-                    )}
+                    <Input
+                      onChange={(e) => handleFile2(e)}
+                      type="file"
+                      id="file2"
+                    />
 
-                    <BigBar>
-                      {progress2 !== null && (
-                        <ProgressBar width={`${progress2}%`} />
+                    <Label2 htmlFor="file2">
+                      <MdFileUpload style={{ opacity: "0.3" }} />
+                      <Span style={{ fontSize: "0.8rem", textAlign: "center" }}>
+                        Only files with 10mb max size are allowed
+                      </Span>
+                      {file2 && file2?.size < 10000000 && (
+                        <span style={{ fontSize: "0.8rem" }}>{file2.name}</span>
                       )}
-                    </BigBar>
-                  </Label2>
-                </InputDiv>
 
-                <InputDiv>
-                  <Label>Upload Valid ID</Label>
+                      <BigBar>
+                        {progress2 !== null && (
+                          <ProgressBar width={`${progress2}%`} />
+                        )}
+                      </BigBar>
+                    </Label2>
+                  </InputDiv>
 
-                  <Input
-                    onChange={(e) => handleFile3(e)}
-                    type="file"
-                    id="file3"
-                  />
+                  <InputDiv>
+                    <Label>Upload Valid ID</Label>
 
-                  <Label2 htmlFor="file3">
-                    <BsFillImageFill style={{ opacity: "0.3" }} />
-                    <Span style={{ fontSize: "0.8rem", textAlign: "center" }}>
-                      Only files with 10mb max size are allowed
-                    </Span>
-                    {file3 && file3?.size < 10000000 && (
-                      <span style={{ fontSize: "0.8rem" }}>{file3.name}</span>
-                    )}
+                    <Input
+                      onChange={(e) => handleFile3(e)}
+                      type="file"
+                      id="file3"
+                    />
 
-                    <BigBar>
-                      {progress3 !== null && (
-                        <ProgressBar width={`${progress3}%`} />
+                    <Label2 htmlFor="file3">
+                      <MdFileUpload style={{ opacity: "0.3" }} />
+                      <Span style={{ fontSize: "0.8rem", textAlign: "center" }}>
+                        Only files with 10mb max size are allowed
+                      </Span>
+                      {file3 && file3?.size < 10000000 && (
+                        <span style={{ fontSize: "0.8rem" }}>{file3.name}</span>
                       )}
-                    </BigBar>
-                  </Label2>
-                </InputDiv>
 
-                <InputDiv>
-                  <Btn type="submit">Apply</Btn>
-                </InputDiv>
-              </Form>
+                      <BigBar>
+                        {progress3 !== null && (
+                          <ProgressBar width={`${progress3}%`} />
+                        )}
+                      </BigBar>
+                    </Label2>
+                  </InputDiv>
+
+                  <InputDiv>
+                    <Btn type="submit">Apply</Btn>
+                  </InputDiv>
+                </Form>
+              )}
             </Wrapper>
           </Div>
         )}
