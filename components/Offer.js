@@ -6,7 +6,7 @@ const Div = styled.div`
   padding-bottom: 2rem;
 `;
 const Wrapper = styled.div`
-  width: 80%;
+  width: 85%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -26,6 +26,7 @@ const ConDiv = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
+  place-items: center;
 
   @media screen and (max-width: 1024px) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -77,7 +78,7 @@ const Offer = () => {
   return (
     <Div>
       <Wrapper>
-        <H2>What You Get</H2>
+        <H2>Our Commitment to You</H2>
         <ConDiv>
           <Con>
             <Img

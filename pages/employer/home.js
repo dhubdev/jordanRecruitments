@@ -299,6 +299,7 @@ const Applications = () => {
                   <H32>{item?.title}</H32>
 
                   <P2>Salary: {item?.pay}</P2>
+                  <P2>Job kind: {item?.option}</P2>
                   <P2>Job type: {item?.type}</P2>
                   <P2>Location: {item?.location}</P2>
                   <P2>{item?.desc}</P2>

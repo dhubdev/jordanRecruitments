@@ -434,6 +434,7 @@ const Home = () => {
                               </Btn2>
                             </Hd>
                             <PJ>Salary: {item.pay}</PJ>
+                            <PJ>Job kind: {item?.option}</PJ>
                             <PJ>Job type: {item.type}</PJ>
                             <PJ>Location: {item.location}</PJ>
                             <Desc>

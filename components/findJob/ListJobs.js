@@ -391,6 +391,7 @@ const ListJobs = () => {
                         <Btn2 onClick={() => handleApply(item._id)}>Apply</Btn2>
                       </Head>
                       <PJ>Salary: {item.pay}</PJ>
+                      <PJ>Job kind: {item.option}</PJ>
                       <PJ>Job type: {item.type}</PJ>
                       <PJ>Location: {item.location}</PJ>
                       <Desc>

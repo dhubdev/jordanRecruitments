@@ -8,6 +8,11 @@ const jobSchema = mongoose.Schema({
   title: {
     type: String,
   },
+
+  option: {
+    type: String,
+  },
+
   pay: {
     type: String,
   },
@@ -34,6 +39,10 @@ const jobSchema = mongoose.Schema({
 
   datePosted: {
     type: String,
+  },
+
+  closed: {
+    type: Boolean,
   },
 });
 

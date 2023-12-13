@@ -1,15 +1,11 @@
-import Explore from "@/components/Explore";
+import ContactUs from "@/components/ContactUs";
 import Footer2 from "@/components/Footer2";
-import Intro from "@/components/Intro";
-import Join from "@/components/Join";
-import JoinTeam from "@/components/JoinTeam";
+
 import Navbar from "@/components/Navbar";
 
-import OfferNill from "@/components/OfferNill";
 import Head from "next/head";
-import Image from "next/image";
 
-export default function Home() {
+export default function Contact() {
   return (
     <>
       <Head>
@@ -20,11 +16,7 @@ export default function Home() {
       </Head>
 
       <Navbar />
-      <Intro />
-      <Explore />
-      <OfferNill />
-      <JoinTeam />
-      <Join />
+      <ContactUs />
       <Footer2 />
     </>
   );

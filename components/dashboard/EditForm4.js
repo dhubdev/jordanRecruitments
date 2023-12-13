@@ -83,6 +83,17 @@ const Input = styled.input`
   border-radius: 7px;
 `;
 
+const Select = styled.select`
+  outline: none;
+  width: 100%;
+  padding: 0 2.5%;
+  height: 2.5rem;
+  border: 1px solid #d1e2ff;
+  font-family: inherit;
+  background: inherit;
+  border-radius: 7px;
+`;
+
 const Pound = styled.div`
   position: absolute;
   top: 47%;
@@ -116,6 +127,7 @@ const EditForm4 = () => {
   const [title, setTitle] = useState("");
   const [pay, setPay] = useState("");
   const [desc, setDesc] = useState("");
+  const [option, setOption] = useState("");
   const [type, setType] = useState("");
   const [location, setLocation] = useState("");
   const [duration, setDuration] = useState("");
@@ -161,6 +173,7 @@ const EditForm4 = () => {
           desc,
           type,
           duration,
+          option,
         },
         config
       );
@@ -189,6 +202,22 @@ const EditForm4 = () => {
               value={title}
               style={{ borderColor: err1 && title.length <= 0 && "red" }}
             />
+          </InputDiv>
+
+          <InputDiv>
+            <Label>Job Kind</Label>
+            <Select
+              onChange={(e) => setOption(e.target.value)}
+              value={option}
+              style={{ borderColor: err1 && location.length <= 0 && "red" }}
+            >
+              <option value="" style={{ color: "grey" }} disabled>
+                Select
+              </option>
+              <option>Care</option>
+              <option>Cleaning</option>
+              <option>Security</option>
+            </Select>
           </InputDiv>
 
           <InputDiv>

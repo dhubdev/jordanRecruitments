@@ -223,11 +223,11 @@ const Navbar = () => {
           <div onClick={handleclick3}>
             <Li>Post job</Li>
           </div>
-          <NewLink href="#offer">
+          <NewLink href="/about">
             <Li>About us</Li>
           </NewLink>
 
-          <NewLink href="#offer">
+          <NewLink href="/contact">
             <Li>Contact us</Li>
           </NewLink>
 
@@ -267,11 +267,11 @@ const Navbar = () => {
             <div onClick={handleclick3}>
               <Li>Post job</Li>
             </div>
-            <NewLink href="#offer">
+            <NewLink href="/about">
               <Li>About us</Li>
             </NewLink>
 
-            <NewLink href="#offer">
+            <NewLink href="/contact">
               <Li>Contact us</Li>
             </NewLink>
 

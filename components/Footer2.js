@@ -204,14 +204,14 @@ const Footer2 = () => {
 
             <Ul>
               <Li>
-                <NewLink href="">About Us</NewLink>
+                <NewLink href="/about">About Us</NewLink>
               </Li>
 
               <Li>
                 <NewLink href="">FAQ</NewLink>
               </Li>
               <Li>
-                <NewLink href="">List a job</NewLink>
+                <NewLink href="/postJob/signUp">List a job</NewLink>
               </Li>
               <Li>
                 <NewLink href="">Career</NewLink>
