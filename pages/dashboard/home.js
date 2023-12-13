@@ -294,7 +294,8 @@ const Home = () => {
   const [filtered, setFiltered] = useState([]);
   const [dataR, setDataR] = useState([]);
 
-  const fetcher = (url) => axios.get(url).then((res) => res.data);
+  const fetcher = (url) =>
+    axios.get(url).then((res) => res.data?.result?.reverse());
   const { data, error } = useSWR("/api/jobs/getJobs", fetcher);
 
   const [opt, setOpt] = useState("");
@@ -333,8 +334,8 @@ const Home = () => {
       router.push("/employer/dashboard");
     }
 
-    setFiltered(data?.result?.reverse());
-    setDataR(data?.result);
+    setFiltered(data);
+    setDataR(data);
 
     setUser(userDetails);
     setOpt("/dashboard/home");

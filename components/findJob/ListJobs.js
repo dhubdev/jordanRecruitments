@@ -271,7 +271,8 @@ const ListJobs = () => {
   const [filtered, setFiltered] = useState([]);
   const [dataR, setDataR] = useState([]);
 
-  const fetcher = (url) => axios.get(url).then((res) => res.data);
+  const fetcher = (url) =>
+    axios.get(url).then((res) => res.data?.result?.reverse());
   const { data, error } = useSWR("/api/jobs/getJobs", fetcher);
 
   const router = useRouter();
@@ -303,8 +304,8 @@ const ListJobs = () => {
   //
 
   useEffect(() => {
-    setFiltered(data?.result?.reverse());
-    setDataR(data?.result);
+    setFiltered(data);
+    setDataR(data);
     setUser(userDetails);
   }, [data]);
 
