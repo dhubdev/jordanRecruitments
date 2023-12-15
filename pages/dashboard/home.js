@@ -344,7 +344,7 @@ const Home = () => {
   const handelSubmit = (e) => {
     e.preventDefault();
     setSearch(e.target.value);
-    const filteredData = dataR.filter((item) => {
+    const filteredData = data.filter((item) => {
       return Object.values(item)
         .join("")
         .toLowerCase()
@@ -424,7 +424,7 @@ const Home = () => {
                   <JobsCon>
                     <H3J>Available Jobs</H3J>
                     <InnerCon>
-                      {dataR?.length !== 0 &&
+                      {data?.length !== 0 &&
                         filtered?.length !== 0 &&
                         filtered?.map((item, i) => (
                           <JobCon key={i}>

@@ -174,6 +174,13 @@ const NewLink = styled.a`
   align-items: center;
 `;
 
+const NewLink2 = styled(Link)`
+  color: #fff;
+  text-decoration: none !important;
+  display: flex;
+  align-items: center;
+`;
+
 const Img = styled(Image)`
   width: 2rem;
   height: 2rem;
@@ -211,7 +218,7 @@ const Footer2 = () => {
               </Li>
 
               <Li>
-                <NewLink href="/jobs">Find job</NewLink>
+                <NewLink2 href="/jobs">Find job</NewLink2>
               </Li>
               <Li>
                 <NewLink href="/postJob/signUp">List a job</NewLink>

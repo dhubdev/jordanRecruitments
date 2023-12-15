@@ -95,6 +95,11 @@ const NewLink = styled.a`
   text-decoration: none;
   color: inherit;
 `;
+
+const NewLink2 = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+`;
 const Li = styled.li`
   cursor: pointer;
   font-weight: 500;
@@ -217,9 +222,9 @@ const Navbar = () => {
           <NewLink href="/">
             <Li>Home</Li>
           </NewLink>
-          <NewLink href="/jobs">
+          <NewLink2 href="/jobs">
             <Li>Find job</Li>
-          </NewLink>
+          </NewLink2>
           <div onClick={handleclick3}>
             <Li>Post job</Li>
           </div>
@@ -261,9 +266,9 @@ const Navbar = () => {
             <NewLink href="/">
               <Li>Home</Li>
             </NewLink>
-            <NewLink href="/jobs">
+            <NewLink2 href="/jobs">
               <Li>Find job</Li>
-            </NewLink>
+            </NewLink2>
             <div onClick={handleclick3}>
               <Li>Post job</Li>
             </div>
