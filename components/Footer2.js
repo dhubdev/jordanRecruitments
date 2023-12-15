@@ -167,7 +167,7 @@ const Copy = styled.div`
   }
 `;
 
-const NewLink = styled(Link)`
+const NewLink = styled.a`
   color: #fff;
   text-decoration: none !important;
   display: flex;
@@ -191,7 +191,10 @@ const Footer2 = () => {
             <LinkHead>Connect</LinkHead>
 
             <Socials>
-              <NewLink href="https://instagram.com/jordan_recruitments?igshid=OGQ5ZDc2ODk2ZA==">
+              <NewLink
+                href="https://instagram.com/jordan_recruitments?igshid=OGQ5ZDc2ODk2ZA=="
+                target="_blank"
+              >
                 <BsInstagram />
               </NewLink>
               <NewLink href="">
@@ -208,14 +211,14 @@ const Footer2 = () => {
               </Li>
 
               <Li>
-                <NewLink href="">FAQ</NewLink>
+                <NewLink href="/jobs">Find job</NewLink>
               </Li>
               <Li>
                 <NewLink href="/postJob/signUp">List a job</NewLink>
               </Li>
-              <Li>
+              {/* <Li>
                 <NewLink href="">Career</NewLink>
-              </Li>
+              </Li> */}
               <Li>
                 <NewLink href="/privacy">Privacy policy</NewLink>
               </Li>

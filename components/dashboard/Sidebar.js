@@ -104,7 +104,7 @@ const Li = styled.li`
   font-weight: ${(props) => props.display};
   cursor: pointer;
 `;
-const NewLink = styled(Link)`
+const NewLink = styled.a`
   text-decoration: none;
 
   color: #000;

@@ -95,7 +95,7 @@ const Invisible = styled.div`
   cursor: pointer;
 `;
 
-const NewLink = styled(Link)`
+const NewLink = styled.a`
   text-decoration: none;
   color: #5ba4fc;
 `;

@@ -47,7 +47,7 @@ const Ul = styled.ul`
 const Li = styled.li`
   cursor: pointer;
 `;
-const NewLink = styled(Link)`
+const NewLink = styled.a`
   text-decoration: none;
   display: flex;
   flex-direction: column;
