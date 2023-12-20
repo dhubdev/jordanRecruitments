@@ -62,7 +62,7 @@ const JobDiv = styled.div`
 `;
 
 const AppInner = styled.div`
-  width: 18rem;
+  width: 20rem;
   padding: 1.5rem;
   border-radius: 7px;
   box-shadow: 3px 3px 15px 0 rgba(0, 0, 0, 0.2);
@@ -82,7 +82,7 @@ const Flag = styled.div`
   color: #fff;
   font-size: 0.7rem;
   //padding: 5px;
-  width: 4rem;
+  width: 5rem;
   height: 2rem;
   display: flex;
   align-items: center;
@@ -151,6 +151,7 @@ const Jobs = () => {
 
   const [schoolStat, setSchoolStat] = useState(false);
   const [search, setSearch] = useState("");
+  const [delOk, setDelOk] = useState(false);
 
   useEffect(() => {
     if (admin === "") {
@@ -177,11 +178,33 @@ const Jobs = () => {
   useEffect(() => {
     getJobs();
     setOption("/admin/jobs");
-  }, []);
+  }, [delOk]);
 
   const handleClick = (id) => {
     cookie.set("jobId", JSON.stringify(id));
     router.push("/admin/editJob");
+  };
+
+  const handleClick2 = async (id) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      const { data } = await axios.post(
+        `/api/jobs/deleteJob`,
+        {
+          jobId: id,
+        },
+        config
+      );
+
+      setDelOk(!delOk);
+    } catch (error) {
+      console.log(error.response);
+    }
   };
 
   const handleView = async (id) => {
@@ -233,6 +256,9 @@ const Jobs = () => {
                 <Hd>
                   <H3>{item?.title}</H3>
                   <Flag onClick={() => handleClick(item?._id)}>Edit Job</Flag>
+                  <Flag onClick={() => handleClick2(item?._id)}>
+                    Delete Job
+                  </Flag>
                 </Hd>
                 <P2>{item?.location}</P2>
                 <AppDiv>

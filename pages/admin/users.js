@@ -123,7 +123,7 @@ const Users = () => {
     router.push("/admin/userDetails");
   };
 
-  console.log(users);
+  // console.log(users);
 
   return (
     <Div>
