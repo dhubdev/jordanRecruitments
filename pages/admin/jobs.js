@@ -171,7 +171,7 @@ const Jobs = () => {
 
       setJobs(data?.result.reverse());
     } catch (error) {
-      console.log(error.response);
+      //console.log(error.response);
     }
   };
 
@@ -203,7 +203,7 @@ const Jobs = () => {
 
       setDelOk(!delOk);
     } catch (error) {
-      console.log(error.response);
+      //console.log(error.response);
     }
   };
 
@@ -226,7 +226,7 @@ const Jobs = () => {
       setApps(data?.result?.reverse());
       //setApps([]);
     } catch (error) {
-      console.log(error.response);
+      //console.log(error.response);
       toast.error(error.response.data.error);
     }
   };

@@ -83,7 +83,7 @@ const AppDetail = () => {
   const admin = cookies?.admin ? JSON.parse(cookies?.admin) : "";
   const appDetail = cookies?.appDetail ? JSON.parse(cookies?.appDetail) : "";
 
-  console.log(appDetail?.cv);
+  // console.log(appDetail?.cv);
 
   const router = useRouter();
 

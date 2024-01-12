@@ -354,7 +354,7 @@ const Home = () => {
   };
 
   const handleClick = (id) => {
-    console.log(id);
+    //console.log(id);
     setMore(id);
   };
 
@@ -363,7 +363,7 @@ const Home = () => {
   };
 
   const handleApply = (id) => {
-    // console.log(id);
+    // //console.log(id);
     router.push(`/dashboard/application/${id}`);
   };
 

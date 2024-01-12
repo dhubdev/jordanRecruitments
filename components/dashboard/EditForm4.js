@@ -185,7 +185,7 @@ const EditForm4 = () => {
       //console.log(data?.profile[0]);
       //navigate("/login");
     } catch (error) {
-      console.log(error.response);
+      //console.log(error.response);
       toast.error(error.response.data.error);
     }
   };

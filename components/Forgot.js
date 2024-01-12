@@ -133,7 +133,7 @@ const Forgot = () => {
 
       router.push("/reset/reset");
     } catch (error) {
-      console.log(error.response);
+      //console.log(error.response);
       toast.error(error.response.data.error);
     }
   };

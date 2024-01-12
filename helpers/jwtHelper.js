@@ -12,7 +12,7 @@ export const accessTokenFunc = (userId) => {
     };
     JWT.sign(payload, secret, options, (err, token) => {
       if (err) {
-        console.log(err.message);
+        //console.log(err.message);
         reject();
         return;
       }
@@ -50,7 +50,7 @@ export const refreshTokenFunc = (userId) => {
     };
     JWT.sign(payload, secret, options, async (err, token) => {
       if (err) {
-        console.log(err.message);
+        //console.log(err.message);
         reject();
         return;
       }
@@ -64,7 +64,7 @@ export const refreshTokenFunc = (userId) => {
         },
         (err, reply) => {
           if (err) {
-            console.log(err.message);
+            //console.log(err.message);
             reject();
             return;
           }
@@ -94,7 +94,6 @@ export const verifyRefreshTokenFunc = (refreshToken) => {
 
         const value = await client.get(userId, (err, result) => {
           if (err) {
-            console.log(err.message);
             reject();
             return;
           }

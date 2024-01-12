@@ -229,7 +229,7 @@ const Applications = () => {
       setApps(data?.result?.reverse());
       //setApps([]);
     } catch (error) {
-      console.log(error.response);
+      //console.log(error.response);
       toast.error(error.response.data.error);
     }
   };
@@ -246,11 +246,11 @@ const Applications = () => {
 
       setJobs(data?.result);
     } catch (error) {
-      console.log(error.response);
+      //console.log(error.response);
     }
   };
 
-  //console.log(apps);
+  ////console.log(apps);
 
   const arr = apps.map((app) =>
     jobs?.filter((item, i) => {
@@ -266,7 +266,7 @@ const Applications = () => {
     router.push("/dashboard/home");
   };
 
-  //console.log(arr);
+  ////console.log(arr);
 
   return (
     <>

@@ -220,11 +220,11 @@ const Applications = () => {
 
   //     setJobs(data?.result);
   //   } catch (error) {
-  //     console.log(error.response);
+  //     //console.log(error.response);
   //   }
   // };
 
-  //console.log(apps);
+  ////console.log(apps);
 
   const handleClick = (item) => {
     setItem(item);
@@ -234,7 +234,7 @@ const Applications = () => {
     router.push("/employer/postJob");
   };
 
-  console.log(userDetails?.user?._id);
+  //console.log(userDetails?.user?._id);
 
   return (
     <>

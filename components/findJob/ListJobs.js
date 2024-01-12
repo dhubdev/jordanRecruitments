@@ -322,7 +322,7 @@ const ListJobs = () => {
   };
 
   const handleClick = (id) => {
-    console.log(id);
+    //console.log(id);
     setMore(id);
   };
 

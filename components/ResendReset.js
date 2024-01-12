@@ -145,7 +145,7 @@ const ResendReset = () => {
       const { data } = await axios.post(`/api/reset/forget`, { email }, config);
       toast.success(data?.status);
     } catch (error) {
-      console.log(error.response);
+      //console.log(error.response);
       toast.error(error.response.data.error);
     }
   };

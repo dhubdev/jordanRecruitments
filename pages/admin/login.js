@@ -120,7 +120,7 @@ const Login = () => {
       //console.log(data);
       router.push("/admin/users");
     } catch (error) {
-      console.log(error.response);
+      //console.log(error.response);
     }
   };
 

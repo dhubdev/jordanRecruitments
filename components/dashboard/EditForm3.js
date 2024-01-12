@@ -136,7 +136,7 @@ const EditForm3 = () => {
   const { data, error } = useSWR("/api/jobs/getJob", fetcher);
 
   useEffect(() => {
-    console.log(data);
+    //console.log(data);
     setTitle(data?.result?.title);
     setDuration(data?.result?.duration);
     setLocation(data?.result?.location);
@@ -145,7 +145,7 @@ const EditForm3 = () => {
     setType(data?.result?.type);
   }, [data]);
 
-  console.log(jobId);
+  //console.log(jobId);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -191,7 +191,7 @@ const EditForm3 = () => {
       //console.log(data?.profile[0]);
       //navigate("/login");
     } catch (error) {
-      console.log(error.response);
+      //console.log(error.response);
       toast.error(error.response.data.error);
     }
   };
