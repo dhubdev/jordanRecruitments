@@ -201,10 +201,11 @@ const Footer2 = () => {
               <NewLink
                 href="https://instagram.com/jordan_recruitments?igshid=OGQ5ZDc2ODk2ZA=="
                 target="_blank"
+                aria-label="instagram"
               >
                 <BsInstagram />
               </NewLink>
-              <NewLink href="">
+              <NewLink href="" aria-label="facebook">
                 <FaFacebookF />
               </NewLink>
             </Socials>

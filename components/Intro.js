@@ -118,7 +118,7 @@ const Intro = () => {
     <Div>
       <Layer />
       <Img
-        src="/recruit2.jpg"
+        src="/recruit2.webp"
         width={2000}
         height={2000}
         priority={true}

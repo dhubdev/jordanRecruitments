@@ -32,7 +32,7 @@ export default function Home() {
         />
         <meta
           property="og:image"
-          content="https://www.jordanrecruitments.com/_next/image?url=%2Frecruit2.jpg&w=2048&q=75"
+          content="https://www.jordanrecruitments.com/_next/image?url=%2Frecruit2.webp&w=2048&q=75"
         />
 
         <meta property="twitter:card" content="summary_large_image" />
@@ -51,7 +51,7 @@ export default function Home() {
         />
         <meta
           property="twitter:image"
-          content="https://www.jordanrecruitments.com/_next/image?url=%2Frecruit2.jpg&w=2048&q=75"
+          content="https://www.jordanrecruitments.com/_next/image?url=%2Frecruit2.webp&w=2048&q=75"
         />
       </Head>
 
