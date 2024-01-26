@@ -168,7 +168,7 @@ const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="john@gmail.com"
               style={{
-                borderColor: err1 && fullname.length <= 0 ? "red" : "#cde4fe",
+                borderColor: err1 && email.length <= 0 ? "red" : "#cde4fe",
               }}
             />
           </InputDiv>
@@ -181,7 +181,7 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter password"
               style={{
-                borderColor: err1 && fullname.length <= 0 ? "red" : "#cde4fe",
+                borderColor: err1 && password.length <= 0 ? "red" : "#cde4fe",
               }}
             />
             <NewLink href="/reset/forgotPassword">

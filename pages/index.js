@@ -53,6 +53,10 @@ export default function Home() {
           property="twitter:image"
           content="https://www.jordanrecruitments.com/_next/image?url=%2Frecruit2.webp&w=2048&q=75"
         />
+        <script
+          defer
+          src="//code.tidio.co/5g21tnzxolaiux79zh7erzcrxbcpbsfu.js"
+        ></script>
       </Head>
 
       <Navbar />
