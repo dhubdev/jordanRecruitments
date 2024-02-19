@@ -72,7 +72,7 @@ const H1 = styled.h1`
 `;
 const P = styled.p`
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1rem;
   opacity: 0.9;
   @media screen and (max-width: 1024px) {
     width: 85%;

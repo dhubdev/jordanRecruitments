@@ -1,3 +1,4 @@
+import AvJobs from "@/components/AvJobs";
 import Explore from "@/components/Explore";
 import Footer2 from "@/components/Footer2";
 import Intro from "@/components/Intro";
@@ -61,7 +62,9 @@ export default function Home() {
 
       <Navbar />
       <Intro />
+      <AvJobs />
       <Explore />
+
       <OfferNill />
       <JoinTeam />
       <Join />

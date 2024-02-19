@@ -35,7 +35,7 @@ const Img = styled(Image)`
 
 const H2 = styled.h2`
   text-align: center;
-  font-size: 3rem;
+  font-size: 2.6rem;
   @media screen and (max-width: 600px) {
     font-size: 2rem;
   }

@@ -63,7 +63,7 @@ const ImageDiv = styled.div`
 const Img = styled(Image)`
   width: 30rem;
   height: 20rem;
-  border-radius: 5px;
+
   box-shadow: 3px 3px 15px 0 rgba(0, 0, 0, 0.2);
   @media screen and (max-width: 1024px) {
     width: 70%;
