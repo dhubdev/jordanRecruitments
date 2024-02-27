@@ -213,18 +213,12 @@ const EditForm2 = () => {
 
           <InputDiv>
             <Label>Job Kind</Label>
-            <Select
+            <Input
               onChange={(e) => setOption(e.target.value)}
               value={option}
               style={{ borderColor: err1 && location.length <= 0 && "red" }}
-            >
-              <option value="" style={{ color: "grey" }} disabled>
-                Select
-              </option>
-              <option>Care</option>
-              <option>Cleaning</option>
-              <option>Security</option>
-            </Select>
+              placeholder="Construction"
+            />
           </InputDiv>
 
           <InputDiv>
