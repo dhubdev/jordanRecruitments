@@ -258,10 +258,14 @@ const Btn2 = styled.button`
     width: 6rem;
   }
 `;
-const Desc = styled.p``;
+
 const PJ = styled.p`
   font-size: 0.9rem;
 `;
+
+function Desc({ html }) {
+  return <div dangerouslySetInnerHTML={{ __html: html }} />;
+}
 
 const ListJobs = () => {
   const [search, setSearch] = useState("");
@@ -396,11 +400,13 @@ const ListJobs = () => {
                       <PJ>Job kind: {item.option}</PJ>
                       <PJ>Job type: {item.type}</PJ>
                       <PJ>Location: {item.location}</PJ>
-                      <Desc>
-                        {more !== item._id
-                          ? item.desc.slice(0, 250) + "..."
-                          : item.desc}
-                      </Desc>
+
+                      {more !== item._id ? (
+                        <Desc html={item?.desc.slice(0, 250) + "..."} />
+                      ) : (
+                        <Desc html={item?.desc} />
+                      )}
+
                       {more === item._id ? (
                         <PJ
                           onClick={() => handleClick2(item._id)}

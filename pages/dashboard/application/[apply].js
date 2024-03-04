@@ -86,7 +86,6 @@ const Title = styled.h3`
   }
 `;
 
-const Desc = styled.p``;
 const PJ = styled.p`
   font-size: 0.9rem;
 `;
@@ -247,6 +246,10 @@ const Loader = styled.div`
     }
   }
 `;
+
+function Desc({ html }) {
+  return <div dangerouslySetInnerHTML={{ __html: html }} />;
+}
 
 const Apply = () => {
   const { user, setUser } = useContext(UserContext);
@@ -623,7 +626,7 @@ const Apply = () => {
                   <PJ>Salary: {job?.pay}</PJ>
                   <PJ>Job type: {job?.type}</PJ>
                   <PJ>Location: {job?.location}</PJ>
-                  <Desc>{job?.desc}</Desc>
+                  <Desc html={job?.desc} />
 
                   <PJ>Duration: {job?.duration}</PJ>
                   <PJ>Date posted: {job?.datePosted?.slice(0, 15)}</PJ>

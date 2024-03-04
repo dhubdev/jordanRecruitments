@@ -57,12 +57,12 @@ const P2 = styled.p``;
 
 const JobDiv = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 1.2rem;
 `;
 
 const AppInner = styled.div`
-  width: 20rem;
+  width: 95%;
   padding: 1.5rem;
   border-radius: 7px;
   box-shadow: 3px 3px 15px 0 rgba(0, 0, 0, 0.2);
@@ -255,10 +255,18 @@ const Jobs = () => {
               <AppInner key={i}>
                 <Hd>
                   <H3>{item?.title}</H3>
-                  <Flag onClick={() => handleClick(item?._id)}>Edit Job</Flag>
-                  <Flag onClick={() => handleClick2(item?._id)}>
-                    Delete Job
-                  </Flag>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: "1rem",
+                    }}
+                  >
+                    <Flag onClick={() => handleClick(item?._id)}>Edit Job</Flag>
+                    <Flag onClick={() => handleClick2(item?._id)}>
+                      Delete Job
+                    </Flag>
+                  </div>
                 </Hd>
                 <P2>{item?.location}</P2>
                 <AppDiv>
